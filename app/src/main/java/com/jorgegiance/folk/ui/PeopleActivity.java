@@ -2,6 +2,7 @@ package com.jorgegiance.folk.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
@@ -20,6 +21,8 @@ public class PeopleActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager2 viewPager;
 
+    FragmentManager manager = getSupportFragmentManager();
+
 
 
 
@@ -35,6 +38,7 @@ public class PeopleActivity extends AppCompatActivity {
 
         PageAdapter pagerAdapter = new PageAdapter(this);
         viewPager.setAdapter(pagerAdapter);
+        viewPager.setUserInputEnabled(false);
 
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(
                 tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy(){
@@ -62,7 +66,7 @@ public class PeopleActivity extends AppCompatActivity {
 
     private void setListeners() {
 
-
+//
 
 
     }

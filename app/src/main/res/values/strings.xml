@@ -4,4 +4,11 @@
     <string name="tab_executive">Executive</string>
     <string name="tab_legislative">Legislative</string>
     <string name="tab_judicial">Judicial</string>
+    <string name="button_Federal">Select state (Federal)</string>
+
+    <string name="subTitle_president">President</string>
+    <string name="subTitle_vice_president">Vice President</string>
+    <string name="cabinet">Cabinet</string>
+    <string name="senate">Senate</string>
+    <string name="congress">Congress</string>
 </resources>
