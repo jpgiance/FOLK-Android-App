@@ -11,4 +11,9 @@
     <string name="cabinet">Cabinet</string>
     <string name="senate">Senate</string>
     <string name="congress">Congress</string>
+    <string name="state_filter">filter by state (all)</string>
+
+<!--    Dialog-->
+    <string name="filter_dialog_title">Select state</string>
+    <string name="cancel">Cancel</string>
 </resources>

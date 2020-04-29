@@ -36,22 +36,24 @@
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <TextView
+        android:id="@+id/filter_senate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
-        android:text="sort by state (all)"
+        android:text="@string/state_filter"
         android:textColor="@color/colorAccent"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <TextView
+        android:id="@+id/filter_congress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
-        android:text="sort by state (all)"
+        android:text="@string/state_filter"
         android:textColor="@color/colorAccent"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
