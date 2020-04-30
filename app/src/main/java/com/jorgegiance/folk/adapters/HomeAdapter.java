@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.jorgegiance.folk.R;
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.NewsListHolder> {
+public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context ctx;
 
@@ -30,9 +30,19 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.NewsListHolder
     }
 
     @Override
-    public void onBindViewHolder( @NonNull NewsListHolder holder, int position ) {
-        holder.informationText.setText("HELLO");
+    public int getItemViewType( int position ) {
+        return super.getItemViewType(position);
     }
+
+    @Override
+    public void onBindViewHolder( @NonNull RecyclerView.ViewHolder holder, int position ) {
+
+    }
+
+//    @Override
+//    public void onBindViewHolder( @NonNull NewsListHolder holder, int position ) {
+//        holder.informationText.setText("HELLO");
+//    }
 
     @Override
     public int getItemCount() {
