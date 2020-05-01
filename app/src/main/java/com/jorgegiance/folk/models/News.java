@@ -4,11 +4,11 @@ public class News {
 
     private String title;
     private String source;
-    private String time;
+    private long time;
     private String posterLink;
     private String videoLink;
 
-    public News( String title, String source, String time, String posterLink, String videoLink ) {
+    public News( String title, String source, long time, String posterLink, String videoLink ) {
         this.title = title;
         this.source = source;
         this.time = time;
@@ -32,11 +32,11 @@ public class News {
         this.source = source;
     }
 
-    public String getTime() {
+    public long getTime() {
         return time;
     }
 
-    public void setTime( String time ) {
+    public void setTime( long time ) {
         this.time = time;
     }
 

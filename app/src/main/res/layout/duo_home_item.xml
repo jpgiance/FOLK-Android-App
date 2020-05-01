@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginBottom="10dp">
+    android:layout_marginBottom="30dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -31,6 +31,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:maxLines="4"
+        android:ellipsize="end"
         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna "
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
         android:textColor="@android:color/white"
@@ -40,7 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
     <TextView
-        android:id="@+id/president_title"
+        android:id="@+id/item_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="43m ago"
@@ -75,6 +76,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:maxLines="4"
+        android:ellipsize="end"
         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna "
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
         android:textColor="@android:color/white"
@@ -84,7 +86,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView_2" />
 
     <TextView
-        android:id="@+id/president_title_2"
+        android:id="@+id/item_time_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="43m ago"

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class DummyDB {
 
 
-    public ArrayList<HomeItem> getHomeItemList(){
+    public static ArrayList<HomeItem> getHomeItemList(){
 
         ArrayList<News> newsList2 = new ArrayList<>();
         ArrayList<News> newsList3 = new ArrayList<>();
@@ -19,7 +19,7 @@ public class DummyDB {
         News news1 = new News(
                 "Biden to discuss sexual assault claim, network says, as President Trump says it could be a ‘false accusation’",
                 "The Washington Post",
-                Long.toString(System.currentTimeMillis()),
+                System.currentTimeMillis(),
                 "https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/ZTV2U7ULFYI6VHP5TEHZ3TDR7Q.jpg&w=767",
                 null
         );
@@ -27,15 +27,15 @@ public class DummyDB {
         News news2 = new News(
                 "Trump calls newly released UFO footage 'a hell of a video'",
                 "CNN",
-                Long.toString(System.currentTimeMillis()),
-                null,
+                System.currentTimeMillis(),
+                "https://amd-ssl.cdn.turner.com/cnn/big/ads/2020/04/30/CoronaVirusFactsAndFears_TownHall_Number9_BillGates_Rev_Tonight_8p_15_C4JJ4_576x324.mp4",
                 "https://amd-ssl.cdn.turner.com/cnn/big/ads/2020/04/30/CoronaVirusFactsAndFears_TownHall_Number9_BillGates_Rev_Tonight_8p_15_C4JJ4_576x324.mp4"
         );
 
         News news3 = new News(
                 "House Democrats push to include primary care workers in coronavirus relief package",
                 "The Hill",
-                Long.toString(System.currentTimeMillis()),
+                System.currentTimeMillis(),
                 "https://thehill.com/sites/default/files/styles/thumb_small_article/public/castrojoaquin_111219gn2_lead.jpg?itok=yg96tJXi",
                 null
         );
@@ -43,7 +43,7 @@ public class DummyDB {
         News news4 = new News(
                 "House Democrats push to include primary care workers in coronavirus relief package",
                 "The Hill",
-                Long.toString(System.currentTimeMillis()),
+                System.currentTimeMillis(),
                 "https://thehill.com/sites/default/files/styles/thumb_small_article/public/castrojoaquin_111219gn2_lead.jpg?itok=yg96tJXi",
                 null
         );
@@ -51,7 +51,7 @@ public class DummyDB {
         News news5 = new News(
                 "House Democrats push to include primary care workers in coronavirus relief package",
                 "The Hill",
-                Long.toString(System.currentTimeMillis()),
+                System.currentTimeMillis(),
                 "https://thehill.com/sites/default/files/styles/thumb_small_article/public/castrojoaquin_111219gn2_lead.jpg?itok=yg96tJXi",
                 null
         );
@@ -90,6 +90,16 @@ public class DummyDB {
                 null
         );
 
+        itemsList.add(item1);
+        itemsList.add(item2);
+        itemsList.add(item3);
+        itemsList.add(item4);
+        itemsList.add(item5);
+        itemsList.add(item1);
+        itemsList.add(item2);
+        itemsList.add(item3);
+        itemsList.add(item4);
+        itemsList.add(item5);
         itemsList.add(item1);
         itemsList.add(item2);
         itemsList.add(item3);

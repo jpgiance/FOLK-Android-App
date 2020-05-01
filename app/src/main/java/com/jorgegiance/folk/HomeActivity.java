@@ -14,6 +14,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.jorgegiance.folk.adapters.HomeAdapter;
 import com.jorgegiance.folk.ui.PeopleActivity;
+import com.jorgegiance.folk.util.DummyDB;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -64,6 +65,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         recycler.setAdapter(adapter);
         recycler.setLayoutManager(new LinearLayoutManager(this));
         recycler.setHasFixedSize(true);
+        adapter.setHomeItemsList(DummyDB.getHomeItemList());
 
         setListeners();
 

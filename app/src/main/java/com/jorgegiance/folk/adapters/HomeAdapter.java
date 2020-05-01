@@ -1,65 +1,246 @@
 package com.jorgegiance.folk.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.jorgegiance.folk.R;
+import com.jorgegiance.folk.models.HomeItem;
+import com.jorgegiance.folk.util.Utilities;
+
+import java.util.ArrayList;
 
 public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context ctx;
+    private ArrayList<HomeItem> homeItemsList;
+    private static int TYPE_INFO = 1;
+    private static int TYPE_TOP = 2;
+    private static int TYPE_SINGLE = 3;
+    private static int TYPE_DUO = 4;
+    private static int TYPE_LIST = 5;
 
     public HomeAdapter( Context ctx ) {
         this.ctx = ctx;
     }
 
+
+    public void setHomeItemsList( ArrayList<HomeItem> homeItemsList ) {
+        this.homeItemsList = homeItemsList;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
-    public NewsListHolder onCreateViewHolder( @NonNull ViewGroup parent, int viewType ) {
+    public RecyclerView.ViewHolder onCreateViewHolder( @NonNull ViewGroup parent, int viewType ) {
 
+        View view;
         LayoutInflater inflater = LayoutInflater.from(ctx);
-        View settingView = inflater.inflate(R.layout.information_item, parent, false);
 
-        return new NewsListHolder(settingView);
+
+
+        if (viewType == TYPE_INFO) {
+                view = inflater.inflate(R.layout.info_home_item, parent, false);
+                return new InfoHolder(view);
+            }
+        if (viewType == TYPE_TOP) {
+            view = inflater.inflate(R.layout.top_home_item, parent, false);
+            return new TopHolder(view);
+        }
+        if (viewType == TYPE_SINGLE) {
+            view = inflater.inflate(R.layout.single_home_item, parent, false);
+            return new SingleHolder(view);
+        }
+        if (viewType == TYPE_DUO) {
+            view = inflater.inflate(R.layout.duo_home_item, parent, false);
+            return new DuoHolder(view);
+        }
+        if (viewType == TYPE_LIST) {
+            view = inflater.inflate(R.layout.list_home_item, parent, false);
+            return new ListHolder(view);
+        }
+        else
+            return null;
+
+
     }
 
     @Override
     public int getItemViewType( int position ) {
-        return super.getItemViewType(position);
+
+        if (homeItemsList.get(position).hasInformation())
+            return TYPE_INFO;
+        else if (homeItemsList.get(position).hasSectionTitle())
+            return TYPE_TOP;
+        else if (homeItemsList.get(position).itemSize() == 1)
+            return TYPE_SINGLE;
+        else if (homeItemsList.get(position).itemSize() == 2)
+            return TYPE_DUO;
+        else if (homeItemsList.get(position).itemSize() > 2)
+            return TYPE_LIST;
+        else
+            return 0;
+
     }
 
     @Override
     public void onBindViewHolder( @NonNull RecyclerView.ViewHolder holder, int position ) {
 
+        if (getItemViewType(position) == TYPE_INFO){
+            ((InfoHolder) holder).populateView(homeItemsList.get(position));
+        }
+        if (getItemViewType(position) == TYPE_TOP){
+            ((TopHolder) holder).populateView(homeItemsList.get(position));
+        }
+        if (getItemViewType(position) == TYPE_SINGLE){
+            ((SingleHolder) holder).populateView(homeItemsList.get(position));
+        }
+        if (getItemViewType(position) == TYPE_DUO){
+            ((DuoHolder) holder).populateView(homeItemsList.get(position));
+        }
+        if (getItemViewType(position) == TYPE_LIST){
+            ((ListHolder) holder).populateView(homeItemsList.get(position));
+        }
     }
 
-//    @Override
-//    public void onBindViewHolder( @NonNull NewsListHolder holder, int position ) {
-//        holder.informationText.setText("HELLO");
-//    }
+
 
     @Override
     public int getItemCount() {
-        return 550;
+        return homeItemsList.size();
     }
 
 
 
-    public class NewsListHolder extends RecyclerView.ViewHolder {
+    public class InfoHolder extends RecyclerView.ViewHolder {
 
         TextView informationText;
 
-        public NewsListHolder( @NonNull View itemView ) {
+        public InfoHolder( @NonNull View itemView ) {
             super(itemView);
 
-            informationText = itemView.findViewById(R.id.information_text);
+            informationText = itemView.findViewById(R.id.info_text);
 
+        }
+
+        public void populateView( HomeItem homeItem ) {
+            informationText.setText(homeItem.getInformationText());
+        }
+    }
+
+    public class TopHolder extends RecyclerView.ViewHolder {
+
+        TextView sectionTitle, itemTitle, itemTime;
+        ImageView itemImage;
+
+
+        public TopHolder( @NonNull View itemView ) {
+            super(itemView);
+
+            sectionTitle = itemView.findViewById(R.id.section_title);
+            itemTitle = itemView.findViewById(R.id.item_title);
+            itemTime = itemView.findViewById(R.id.item_time);
+            itemImage = itemView.findViewById(R.id.item_image);
+
+        }
+
+        @SuppressLint("SetTextI18n")
+        public void populateView( HomeItem homeItem ) {
+            sectionTitle.setText(homeItem.getSectionTitle());
+            itemTitle.setText(homeItem.getNewsArrayList().get(0).getTitle());
+            itemTime.setText(Utilities.time2String(homeItem.getNewsArrayList().get(0).getTime()));
+
+            Glide.with(ctx)
+                    .load(homeItem.getNewsArrayList().get(0).getPosterLink())
+                    .centerCrop()
+                    .into(itemImage);
+        }
+    }
+
+    public class SingleHolder extends RecyclerView.ViewHolder {
+
+        TextView itemTitle, itemTime;
+        ImageView itemImage;
+
+        public SingleHolder( @NonNull View itemView ) {
+            super(itemView);
+
+            itemTitle = itemView.findViewById(R.id.item_title);
+            itemTime = itemView.findViewById(R.id.item_time);
+            itemImage = itemView.findViewById(R.id.item_image);
+
+        }
+
+        @SuppressLint("SetTextI18n")
+        public void populateView( HomeItem homeItem ) {
+
+            itemTitle.setText(homeItem.getNewsArrayList().get(0).getTitle());
+            itemTime.setText(Utilities.time2String(homeItem.getNewsArrayList().get(0).getTime()));
+
+            Glide.with(ctx)
+                    .load(homeItem.getNewsArrayList().get(0).getPosterLink())
+                    .centerCrop()
+                    .into(itemImage);
+        }
+    }
+
+    public class DuoHolder extends RecyclerView.ViewHolder {
+
+        TextView itemTitle, itemTime, itemTitle2, itemTime2;
+        ImageView itemImage, itemImage2;
+
+        public DuoHolder( @NonNull View itemView ) {
+            super(itemView);
+
+            itemTitle = itemView.findViewById(R.id.item_title);
+            itemTime = itemView.findViewById(R.id.item_time);
+            itemImage = itemView.findViewById(R.id.item_image);
+
+            itemTitle2 = itemView.findViewById(R.id.item_title_2);
+            itemTime2 = itemView.findViewById(R.id.item_time_2);
+            itemImage2 = itemView.findViewById(R.id.item_image_2);
+
+        }
+
+        @SuppressLint("SetTextI18n")
+        public void populateView( HomeItem homeItem ) {
+            itemTitle.setText(homeItem.getNewsArrayList().get(0).getTitle());
+            itemTime.setText(Utilities.time2String(homeItem.getNewsArrayList().get(0).getTime()));
+
+            itemTitle2.setText(homeItem.getNewsArrayList().get(1).getTitle());
+            itemTime2.setText(Utilities.time2String(homeItem.getNewsArrayList().get(1).getTime()));
+
+            Glide.with(ctx)
+                    .load(homeItem.getNewsArrayList().get(0).getPosterLink())
+                    .centerCrop()
+                    .into(itemImage);
+
+            Glide.with(ctx)
+                    .load(homeItem.getNewsArrayList().get(1).getPosterLink())
+                    .centerCrop()
+                    .into(itemImage2);
+        }
+    }
+
+    public class ListHolder extends RecyclerView.ViewHolder {
+
+        /* TODO
+        * Implement Holder for horizontal recycler view
+        * */
+
+        public ListHolder( @NonNull View itemView ) {
+            super(itemView);
+        }
+
+        public void populateView( HomeItem homeItem ) {
         }
     }
 }
