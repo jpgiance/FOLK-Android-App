@@ -4,16 +4,27 @@ public class News {
 
     private String title;
     private String source;
+    private String content;
     private long time;
     private String posterLink;
     private String videoLink;
 
-    public News( String title, String source, long time, String posterLink, String videoLink ) {
+
+    public News( String title, String source, String content, long time, String posterLink, String videoLink ) {
         this.title = title;
         this.source = source;
+        this.content = content;
         this.time = time;
         this.posterLink = posterLink;
         this.videoLink = videoLink;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent( String content ) {
+        this.content = content;
     }
 
     public String getTitle() {
