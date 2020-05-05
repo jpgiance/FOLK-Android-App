@@ -11,14 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/FolksTheme">
-        <activity android:name=".HomeActivity"></activity>
-        <activity android:name=".ui.PeopleActivity">
+        <activity android:name=".ui.activities.DetailHomeActivity"/>
+        <activity
+            android:name=".ui.activities.UserActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.activities.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activities.PeopleActivity"/>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.jorgegiance.folk.ui;
+package com.jorgegiance.folk.ui.dialogs;
 
 import android.app.Dialog;
 import android.content.DialogInterface;

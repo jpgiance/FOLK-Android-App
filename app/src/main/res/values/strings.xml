@@ -12,8 +12,29 @@
     <string name="senate">Senate</string>
     <string name="congress">Congress</string>
     <string name="state_filter">filter by state (all)</string>
+    <string name="profile_email">Email:</string>
+    <string name="profile_name">Name:</string>
+    <string name="profile_age">Date of Birth:</string>
+    <string name="profile_location_country">Country:</string>
+    <string name="profile_location">Location</string>
+    <string name="profile_location_city">City:</string>
+    <string name="profile_location_state">State:</string>
+    <string name="profile_location_zip_code">ZIP code:</string>
+    <string name="profile_title">Personal Information</string>
+    <string name="following_title">Candidates:</string>
+    <string name="settings_privacy_policy"><u>Privacy Policy</u></string>
+
 
     <!--    Dialog-->
     <string name="filter_dialog_title">Select state</string>
     <string name="cancel">Cancel</string>
+    <string name="title_activity_user">UserActivity</string>
+    <string name="tab_profile">Profile</string>
+    <string name="tab_following">Following</string>
+    <string name="tab_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 </resources>

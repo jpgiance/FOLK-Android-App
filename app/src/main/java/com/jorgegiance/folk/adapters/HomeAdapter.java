@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.jorgegiance.folk.R;
 import com.jorgegiance.folk.models.HomeItem;
+import com.jorgegiance.folk.models.News;
 import com.jorgegiance.folk.util.Utilities;
 
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.homeItemsList = homeItemsList;
         notifyDataSetChanged();
     }
+
 
     @NonNull
     @Override
@@ -111,8 +113,6 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-
-
     @Override
     public int getItemCount() {
         return homeItemsList.size();
@@ -120,7 +120,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
 
-    public class InfoHolder extends RecyclerView.ViewHolder {
+    public class InfoHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView informationText;
 
@@ -128,15 +128,21 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             super(itemView);
 
             informationText = itemView.findViewById(R.id.info_text);
+            informationText.setOnClickListener(this);
 
         }
 
         public void populateView( HomeItem homeItem ) {
             informationText.setText(homeItem.getInformationText());
         }
+
+        @Override
+        public void onClick( View v ) {
+            // TODO implement onClick for info item
+        }
     }
 
-    public class TopHolder extends RecyclerView.ViewHolder {
+    public class TopHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView sectionTitle, itemTitle, itemTime;
         ImageView itemImage;
@@ -162,10 +168,19 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     .load(homeItem.getNewsArrayList().get(0).getPosterLink())
                     .centerCrop()
                     .into(itemImage);
+
+            itemTime.setOnClickListener(this);
+            itemTitle.setOnClickListener(this);
+            itemImage.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick( View v ) {
+
         }
     }
 
-    public class SingleHolder extends RecyclerView.ViewHolder {
+    public class SingleHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView itemTitle, itemTime;
         ImageView itemImage;
@@ -189,10 +204,19 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     .load(homeItem.getNewsArrayList().get(0).getPosterLink())
                     .centerCrop()
                     .into(itemImage);
+
+            itemTime.setOnClickListener(this);
+            itemTitle.setOnClickListener(this);
+            itemImage.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick( View v ) {
+
         }
     }
 
-    public class DuoHolder extends RecyclerView.ViewHolder {
+    public class DuoHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView itemTitle, itemTime, itemTitle2, itemTime2;
         ImageView itemImage, itemImage2;
@@ -227,13 +251,45 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     .load(homeItem.getNewsArrayList().get(1).getPosterLink())
                     .centerCrop()
                     .into(itemImage2);
+
+            itemTime.setOnClickListener(this);
+            itemTitle.setOnClickListener(this);
+            itemImage.setOnClickListener(this);
+
+            itemTime2.setOnClickListener(this);
+            itemTitle2.setOnClickListener(this);
+            itemImage2.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick( View v ) {
+            switch (v.getId()){
+                case R.id.item_image:
+                case R.id.item_time:
+                case R.id.item_title:
+                    firstItemClicked();
+                    break;
+                case R.id.item_image_2:
+                case R.id.item_time_2:
+                case R.id.item_title_2:
+                    SecondItemClicked();
+                    break;
+            }
+        }
+
+        private void SecondItemClicked() {
+        }
+
+        private void firstItemClicked() {
+
         }
     }
 
     public class ListHolder extends RecyclerView.ViewHolder {
 
-        /* TODO
-        * Implement Holder for horizontal recycler view
+        /* TODO Implement Holder for horizontal recycler view
+        *
         * */
 
         public ListHolder( @NonNull View itemView ) {
@@ -242,5 +298,11 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         public void populateView( HomeItem homeItem ) {
         }
+    }
+
+
+
+    public interface HomeAdapterOnClickHandler {
+        void onItemClicked( News news );
     }
 }

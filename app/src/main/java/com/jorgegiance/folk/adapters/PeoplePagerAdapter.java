@@ -5,15 +5,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.jorgegiance.folk.ui.ExecutiveFragment;
-import com.jorgegiance.folk.ui.JudicialFragment;
-import com.jorgegiance.folk.ui.LegislativeFragment;
+import com.jorgegiance.folk.ui.fragments.ExecutiveFragment;
+import com.jorgegiance.folk.ui.fragments.JudicialFragment;
+import com.jorgegiance.folk.ui.fragments.LegislativeFragment;
 
 
-public class PageAdapter extends FragmentStateAdapter {
+public class PeoplePagerAdapter extends FragmentStateAdapter {
 
 
-    public PageAdapter( @NonNull FragmentActivity fragmentActivity ) {
+    public PeoplePagerAdapter( @NonNull FragmentActivity fragmentActivity ) {
         super(fragmentActivity);
     }
 

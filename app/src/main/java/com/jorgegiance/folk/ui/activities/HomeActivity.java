@@ -1,4 +1,4 @@
-package com.jorgegiance.folk;
+package com.jorgegiance.folk.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,17 +12,18 @@ import android.widget.ImageView;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.jorgegiance.folk.R;
 import com.jorgegiance.folk.adapters.HomeAdapter;
-import com.jorgegiance.folk.ui.PeopleActivity;
+import com.jorgegiance.folk.models.News;
 import com.jorgegiance.folk.util.DummyDB;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener, HomeAdapter.HomeAdapterOnClickHandler {
 
     // UI components
     AppBarLayout appBarLayout;
     MaterialToolbar appBar;
     CollapsingToolbarLayout collapsingToolbarLayout;
-    ImageView userButton, homeButton, peopleButton, collapseingImg;
+    ImageView userButton, homeButton, peopleButton;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -36,7 +37,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         homeButton = findViewById(R.id.icon_home);
         peopleButton = findViewById(R.id.icon_peopleGroup);
         collapsingToolbarLayout = findViewById(R.id.collapsingToolbarLayout);
-        collapseingImg = findViewById(R.id.head_image);
 
         appBar.setVisibility(View.GONE);
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
@@ -102,15 +102,23 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void transitionToHomeScreen() {
-        Intent homeIntent = new Intent(this, HomeActivity.class);
-        startActivity(homeIntent);
     }
 
     private void transitionToPeopleScreen() {
-        Intent homeIntent = new Intent(this, PeopleActivity.class);
-        startActivity(homeIntent);
+        Intent peopleIntent = new Intent(this, PeopleActivity.class);
+        startActivity(peopleIntent);
     }
 
     private void transitionToUserScreen() {
+        Intent userIntent = new Intent(this, UserActivity.class);
+        startActivity(userIntent);
+    }
+
+    @Override
+    public void onItemClicked( News news ) {
+
+        Intent detailIntent = new Intent(this, DetailHomeActivity.class);
+        startActivity(detailIntent);
+
     }
 }

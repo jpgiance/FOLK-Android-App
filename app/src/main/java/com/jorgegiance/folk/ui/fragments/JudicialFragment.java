@@ -1,4 +1,4 @@
-package com.jorgegiance.folk.ui;
+package com.jorgegiance.folk.ui.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

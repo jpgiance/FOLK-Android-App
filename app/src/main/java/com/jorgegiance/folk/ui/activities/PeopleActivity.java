@@ -1,4 +1,4 @@
-package com.jorgegiance.folk.ui;
+package com.jorgegiance.folk.ui.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,9 +12,8 @@ import android.widget.ImageView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-import com.jorgegiance.folk.HomeActivity;
 import com.jorgegiance.folk.R;
-import com.jorgegiance.folk.adapters.PageAdapter;
+import com.jorgegiance.folk.adapters.PeoplePagerAdapter;
 
 public class PeopleActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -45,7 +44,7 @@ public class PeopleActivity extends AppCompatActivity implements View.OnClickLis
         setIconColor();
 
 
-        PageAdapter pagerAdapter = new PageAdapter(this);
+        PeoplePagerAdapter pagerAdapter = new PeoplePagerAdapter(this);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setUserInputEnabled(false);
 
@@ -111,5 +110,7 @@ public class PeopleActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void transitionToUserScreen() {
+        Intent userIntent = new Intent(this, UserActivity.class);
+        startActivity(userIntent);
     }
 }
