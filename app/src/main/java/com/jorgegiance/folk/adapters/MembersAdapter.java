@@ -1,5 +1,6 @@
 package com.jorgegiance.folk.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,16 +13,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.jorgegiance.folk.R;
+import com.jorgegiance.folk.models.Member;
 import com.jorgegiance.folk.models.Person;
+import com.jorgegiance.folk.util.Utilities;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.PeopleHolder> {
+public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.PeopleHolder> {
 
     private Context ctx;
     private ArrayList<Person> personList;
+    private List<Member> membersList;
 
-    public PeopleAdapter( Context ctx ) {
+    public MembersAdapter( Context ctx ) {
         this.ctx = ctx;
     }
 
@@ -34,27 +39,29 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.PeopleHold
         return holder;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder( @NonNull PeopleHolder holder, int position ) {
 
-        holder.personTitle.setText(personList.get(position).getPositionTitle());
-        holder.personName.setText(personList.get(position).getName());
+        holder.personTitle.setText(membersList.get(position).getState() + " - " + Utilities.parseParty(membersList.get(position).getParty()));
+        holder.personName.setText(Utilities.parseName(membersList.get(position).getLastName(), membersList.get(position).getFirstName()));
 
         Glide.with(ctx)
-             .load(personList.get(position).getPhotoLink())
+             .load(Utilities.congressPhotoId(membersList.get(position).getId()))
              .centerCrop()
+             .placeholder(R.drawable.ic_person)
              .into(holder.personImage);
 
     }
 
     @Override
     public int getItemCount() {
-        return personList.size();
+        return membersList == null ? 0 : membersList.size();
     }
 
 
-    public void setPersonList(ArrayList<Person> list){
-        personList = list;
+    public void setMembersList( List<Member> list){
+        membersList = list;
         notifyDataSetChanged();
     }
 

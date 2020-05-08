@@ -3,14 +3,12 @@ package com.jorgegiance.folk.ui.activities;
 import android.content.Intent;
 import android.graphics.BlendMode;
 import android.graphics.BlendModeColorFilter;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.viewpager2.widget.ViewPager2;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,7 +35,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_user);
 
 
-        viewPager = findViewById(R.id.user_view_pager);
+        viewPager = findViewById(R.id.detail_view_pager);
         tabs = findViewById(R.id.tabs);
         userButton = findViewById(R.id.icon_user);
         homeButton = findViewById(R.id.icon_home);

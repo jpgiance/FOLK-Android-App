@@ -1,6 +1,9 @@
 package com.jorgegiance.folk.models;
 
-public class News {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class News implements Parcelable {
 
     private String title;
     private String source;
@@ -18,6 +21,8 @@ public class News {
         this.posterLink = posterLink;
         this.videoLink = videoLink;
     }
+
+
 
     public String getContent() {
         return content;
@@ -75,4 +80,45 @@ public class News {
         else
             return 0;
     }
+
+
+
+    // ....parcelable implementation
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel( Parcel dest, int flags ) {
+        dest.writeString(title);
+        dest.writeString(source);
+        dest.writeString(content);
+        dest.writeLong(time);
+        dest.writeString(posterLink);
+        dest.writeString(videoLink);
+    }
+
+    protected News( Parcel in ) {
+        title = in.readString();
+        source = in.readString();
+        content = in.readString();
+        time = in.readLong();
+        posterLink = in.readString();
+        videoLink = in.readString();
+    }
+
+    public static final Creator<News> CREATOR = new Creator<News>() {
+        @Override
+        public News createFromParcel( Parcel in ) {
+            return new News(in);
+        }
+
+        @Override
+        public News[] newArray( int size ) {
+            return new News[size];
+        }
+    };
 }

@@ -24,7 +24,7 @@ public class UserPagerAdapter extends FragmentStateAdapter {
 
     public UserPagerAdapter( Context context, @NonNull FragmentActivity fragmentActivity ) {
         super(Objects.requireNonNull(fragmentActivity));
-        mContext = context;
+        this.mContext = context;
     }
 
 

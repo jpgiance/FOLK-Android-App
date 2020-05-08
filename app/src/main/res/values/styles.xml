@@ -1,7 +1,7 @@
 <resources>
 
 
-    <style name="FolksTheme" parent="Theme.MaterialComponents.NoActionBar">
+    <style name="FolksThemeDark" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -11,6 +11,17 @@
         <item name="tabSelectedTextColor">@color/colorAccent</item>
         <item name="tabTextColor">@color/colorWhite</item>
 
+    </style>
+
+    <style name="FolksThemeWhite" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="tabIndicatorColor">@color/colorAccent</item>
+        <item name="tabIconTint">@color/colorWhite</item>
+        <item name="tabSelectedTextColor">@color/colorPrimary</item>
+        <item name="tabTextColor">@color/colorPrimary</item>
 
     </style>
 

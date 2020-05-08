@@ -10,8 +10,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/FolksTheme">
-        <activity android:name=".ui.activities.DetailHomeActivity"/>
+        android:theme="@style/FolksThemeDark">
+        <activity android:name=".ui.activities.DetailHomeActivity"
+            android:theme="@style/FolksThemeWhite"/>
         <activity
             android:name=".ui.activities.UserActivity"
             android:windowSoftInputMode="adjustPan" />

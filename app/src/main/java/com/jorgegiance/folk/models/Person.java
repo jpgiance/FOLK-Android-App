@@ -2,6 +2,7 @@ package com.jorgegiance.folk.models;
 
 public class Person {
 
+
     private String name;
     private String positionTitle;
     private String photoLink;

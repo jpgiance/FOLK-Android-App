@@ -12,7 +12,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/FolksTheme">
+        style="@style/FolksThemeDark">
 
 
         <ImageView
@@ -42,9 +42,7 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/FolksTheme">
-
-        </com.google.android.material.tabs.TabLayout>
+            style="@style/FolksThemeDark"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -54,7 +52,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/user_view_pager"
+            android:id="@+id/detail_view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />

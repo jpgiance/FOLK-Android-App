@@ -20,17 +20,25 @@
             app:layout_scrollFlags="scroll|enterAlways">
 
             <ImageView
+                android:id="@+id/icon_back"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_chevron_left" />
+
+            <ImageView
                 android:id="@+id/icon_logo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_logo_folks" />
 
             <ImageView
-                android:id="@+id/icon_info"
+                android:id="@+id/icon_share"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|right"
-                android:src="@drawable/ic_info" />
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_share" />
 
         </com.google.android.material.appbar.MaterialToolbar>
 
@@ -41,10 +49,11 @@
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-       <FrameLayout
+       <androidx.fragment.app.FragmentContainerView
            android:id="@+id/detail_fragment_container"
            android:layout_width="match_parent"
-           android:layout_height="wrap_content"/>
+           android:layout_height="wrap_content"
+           android:name="com.jorgegiance.folk.ui.fragments.DetailFragment"/>
 
     </androidx.core.widget.NestedScrollView>
 

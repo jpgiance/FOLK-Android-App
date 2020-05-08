@@ -41,6 +41,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         appBar.setVisibility(View.GONE);
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
 
+
             @Override
             public void onOffsetChanged( AppBarLayout appBarLayout, int verticalOffset ) {
 
@@ -61,7 +62,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         setIconColor();
 
         RecyclerView recycler = findViewById(R.id.feed_recycler);
-        HomeAdapter adapter = new HomeAdapter(this);
+        HomeAdapter adapter = new HomeAdapter(this, this);
         recycler.setAdapter(adapter);
         recycler.setLayoutManager(new LinearLayoutManager(this));
         recycler.setHasFixedSize(true);
@@ -118,6 +119,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onItemClicked( News news ) {
 
         Intent detailIntent = new Intent(this, DetailHomeActivity.class);
+        detailIntent.putExtra(getResources().getString(R.string.NEWS_KEY), news);
         startActivity(detailIntent);
 
     }

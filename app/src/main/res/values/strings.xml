@@ -11,7 +11,10 @@
     <string name="cabinet">Cabinet</string>
     <string name="senate">Senate</string>
     <string name="congress">Congress</string>
-    <string name="state_filter">filter by state (all)</string>
+    <string name="state_filter">filter by region (all)</string>
+    <string name="filter_all">All</string>
+    <string name="filter_text_start">(</string>
+    <string name="filter_text_end">)</string>
     <string name="profile_email">Email:</string>
     <string name="profile_name">Name:</string>
     <string name="profile_age">Date of Birth:</string>
@@ -23,6 +26,14 @@
     <string name="profile_title">Personal Information</string>
     <string name="following_title">Candidates:</string>
     <string name="settings_privacy_policy"><u>Privacy Policy</u></string>
+    <string name="NEWS_KEY">NEWS_SELECTED</string>
+    <string name="vote_button">VOTE</string>
+    <string name="tab_content">Content</string>
+    <string name="tab_debate">Debate</string>
+
+    <string name="republican_party">Rep</string>
+    <string name="democratic_party">Dem</string>
+    <string name="independent_party">Ind</string>
 
 
     <!--    Dialog-->

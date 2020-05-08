@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private HomeAdapterOnClickHandler handler;
     private Context ctx;
     private ArrayList<HomeItem> homeItemsList;
     private static int TYPE_INFO = 1;
@@ -29,8 +30,9 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static int TYPE_DUO = 4;
     private static int TYPE_LIST = 5;
 
-    public HomeAdapter( Context ctx ) {
+    public HomeAdapter( Context ctx, HomeAdapterOnClickHandler handler ) {
         this.ctx = ctx;
+        this.handler = handler;
     }
 
 
@@ -176,7 +178,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         @Override
         public void onClick( View v ) {
-
+            handler.onItemClicked(homeItemsList.get(getAdapterPosition()).getNewsArrayList().get(0));
         }
     }
 
@@ -212,7 +214,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         @Override
         public void onClick( View v ) {
-
+            handler.onItemClicked(homeItemsList.get(getAdapterPosition()).getNewsArrayList().get(0));
         }
     }
 
@@ -279,10 +281,11 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         private void SecondItemClicked() {
+            handler.onItemClicked(homeItemsList.get(getAdapterPosition()).getNewsArrayList().get(1));
         }
 
         private void firstItemClicked() {
-
+            handler.onItemClicked(homeItemsList.get(getAdapterPosition()).getNewsArrayList().get(0));
         }
     }
 

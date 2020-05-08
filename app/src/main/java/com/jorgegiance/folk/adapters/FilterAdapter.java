@@ -8,18 +8,22 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jorgegiance.folk.R;
+import com.jorgegiance.folk.viewmodels.PeopleActivityViewModel;
 
 public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.StatesListHolder> {
 
     private Context ctx;
+    private FilterAdapterOnClickHandler handler;
     private String[] states;
 
-    public FilterAdapter( Context ctx ) {
-        this.ctx = ctx;
 
+    public FilterAdapter( Context ctx, FilterAdapterOnClickHandler handler ) {
+        this.ctx = ctx;
+        this.handler = handler;
         Resources res = ctx.getResources();
         states = res.getStringArray(R.array.states_list);
     }
@@ -58,7 +62,12 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.StatesList
 
         @Override
         public void onClick( View v ) {
-
+            handler.onFilterClicked(states[getAdapterPosition()]);
         }
     }
+
+    public interface FilterAdapterOnClickHandler {
+        void onFilterClicked( String state );
+    }
+
 }
