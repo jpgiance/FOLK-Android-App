@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.jorgegiance.folk.ui.fragments.ExecutiveFragment;
-import com.jorgegiance.folk.ui.fragments.JudicialFragment;
-import com.jorgegiance.folk.ui.fragments.LegislativeFragment;
+import com.jorgegiance.folk.ui.fragments.StatesFragment;
+import com.jorgegiance.folk.ui.fragments.LocalFragment;
+import com.jorgegiance.folk.ui.fragments.CongressFragment;
 
 
 public class PeoplePagerAdapter extends FragmentStateAdapter {
@@ -22,11 +22,11 @@ public class PeoplePagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment( int position ) {
         switch (position){
             case 0:
-                return new ExecutiveFragment();
+                return new StatesFragment();
             case 1:
-                return new LegislativeFragment();
+                return new CongressFragment();
             case 2:
-                return new JudicialFragment();
+                return new LocalFragment();
             default:
                 return null;
         }

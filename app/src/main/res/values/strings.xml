@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">FOLKS</string>
 
-    <string name="tab_executive">Executive</string>
-    <string name="tab_legislative">Legislative</string>
-    <string name="tab_judicial">Judicial</string>
+    <string name="tab_state">States</string>
+    <string name="tab_congress">Congress</string>
+    <string name="tab_local">Local</string>
     <string name="button_Federal">Select state (Federal)</string>
 
     <string name="subTitle_president">President</string>

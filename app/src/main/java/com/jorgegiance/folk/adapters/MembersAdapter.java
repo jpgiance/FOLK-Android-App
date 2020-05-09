@@ -13,17 +13,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.jorgegiance.folk.R;
-import com.jorgegiance.folk.models.Member;
+import com.jorgegiance.folk.models.propublicaModels.Member;
 import com.jorgegiance.folk.models.Person;
 import com.jorgegiance.folk.util.Utilities;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.PeopleHolder> {
+public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.MembersHolder> {
 
     private Context ctx;
-    private ArrayList<Person> personList;
     private List<Member> membersList;
 
     public MembersAdapter( Context ctx ) {
@@ -32,16 +31,16 @@ public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.PeopleHo
 
     @NonNull
     @Override
-    public PeopleHolder onCreateViewHolder( @NonNull ViewGroup parent, int viewType ) {
+    public MembersHolder onCreateViewHolder( @NonNull ViewGroup parent, int viewType ) {
         LayoutInflater inflater = LayoutInflater.from(ctx);
         View peopleView = inflater.inflate(R.layout.people_item, parent, false);
-        PeopleHolder holder = new PeopleHolder(peopleView);
+        MembersHolder holder = new MembersHolder(peopleView);
         return holder;
     }
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder( @NonNull PeopleHolder holder, int position ) {
+    public void onBindViewHolder( @NonNull MembersHolder holder, int position ) {
 
         holder.personTitle.setText(membersList.get(position).getState() + " - " + Utilities.parseParty(membersList.get(position).getParty()));
         holder.personName.setText(Utilities.parseName(membersList.get(position).getLastName(), membersList.get(position).getFirstName()));
@@ -68,13 +67,13 @@ public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.PeopleHo
 
 
 
-    public class PeopleHolder extends RecyclerView.ViewHolder {
+    public class MembersHolder extends RecyclerView.ViewHolder {
 
         ImageView personImage;
         TextView personTitle;
         TextView personName;
 
-        public PeopleHolder( @NonNull View itemView ) {
+        public MembersHolder( @NonNull View itemView ) {
             super(itemView);
 
             personImage = itemView.findViewById(R.id.image_person);

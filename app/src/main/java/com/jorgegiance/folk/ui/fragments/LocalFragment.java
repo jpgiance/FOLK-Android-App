@@ -11,9 +11,9 @@ import androidx.fragment.app.Fragment;
 
 import com.jorgegiance.folk.R;
 
-public class JudicialFragment extends Fragment {
+public class LocalFragment extends Fragment {
 
-    public JudicialFragment() {
+    public LocalFragment() {
     }
 
     @Nullable

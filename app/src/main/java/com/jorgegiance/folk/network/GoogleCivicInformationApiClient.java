@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class GoogleCivicInformationApiClient {
 
-    private static final String BASE_URL = "";
+    private static final String BASE_URL = "https://www.googleapis.com/civicinfo/v2/";
     private static Retrofit retrofit;
 
     public static Retrofit getApiClient(){

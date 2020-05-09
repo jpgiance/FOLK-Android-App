@@ -1,4 +1,4 @@
-package com.jorgegiance.folk.models;
+package com.jorgegiance.folk.models.propublicaModels;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -131,6 +131,15 @@ public class Member {
     @SerializedName("state_rank")
     @Expose
     private String stateRank;
+    @SerializedName("district")
+    @Expose
+    private String district;
+    @SerializedName("at_large")
+    @Expose
+    private Boolean atLarge;
+    @SerializedName("geoid")
+    @Expose
+    private String geoid;
     @SerializedName("lis_id")
     @Expose
     private String lisId;
@@ -512,4 +521,27 @@ public class Member {
         this.votesAgainstPartyPct = votesAgainstPartyPct;
     }
 
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict( String district ) {
+        this.district = district;
+    }
+
+    public Boolean getAtLarge() {
+        return atLarge;
+    }
+
+    public void setAtLarge( Boolean atLarge ) {
+        this.atLarge = atLarge;
+    }
+
+    public String getGeoid() {
+        return geoid;
+    }
+
+    public void setGeoid( String geoid ) {
+        this.geoid = geoid;
+    }
 }

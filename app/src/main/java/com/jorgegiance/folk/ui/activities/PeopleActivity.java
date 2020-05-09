@@ -55,13 +55,13 @@ public class PeopleActivity extends AppCompatActivity implements View.OnClickLis
             public void onConfigureTab( @NonNull TabLayout.Tab tab, int position ) {
                  switch (position){
                      case 0:
-                         tab.setText(R.string.tab_executive);
+                         tab.setText(R.string.tab_state);
                          break;
                      case 1:
-                         tab.setText(R.string.tab_legislative);
+                         tab.setText(R.string.tab_congress);
                          break;
                      case 2:
-                         tab.setText(R.string.tab_judicial);
+                         tab.setText(R.string.tab_local);
                          break;
                  }
             }

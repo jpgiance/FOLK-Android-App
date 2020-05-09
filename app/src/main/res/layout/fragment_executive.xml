@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.ExecutiveFragment">
+    tools:context=".ui.fragments.StatesFragment">
 
 
     <Button
@@ -49,12 +49,14 @@
 
     <TextView
         android:id="@+id/president_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:text="@string/subTitle_president"
         android:textColor="@color/colorGrey"
         android:textSize="12sp"
+        android:textAlignment="center"
+        android:maxLines="2"
         app:layout_constraintEnd_toEndOf="@+id/card_president"
         app:layout_constraintStart_toStartOf="@+id/card_president"
         app:layout_constraintTop_toBottomOf="@+id/card_president" />
@@ -96,11 +98,13 @@
 
     <TextView
         android:id="@+id/vice_president_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:text="@string/subTitle_vice_president"
         android:textSize="12sp"
+        android:textAlignment="center"
+        android:maxLines="2"
         android:textColor="@color/colorGrey"
         app:layout_constraintEnd_toEndOf="@+id/card_vice_president"
         app:layout_constraintStart_toStartOf="@+id/card_vice_president"
@@ -129,27 +133,15 @@
         app:layout_constraintRight_toRightOf="@+id/card_vice_president"
         app:layout_constraintTop_toBottomOf="@id/president_name" />
 
-    <TextView
-        android:id="@+id/cabinet_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/cabinet"
-        android:textColor="@android:color/white"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/person_recycler"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="28dp"
         android:layout_marginTop="0dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cabinet_title" />
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <View
         android:layout_width="match_parent"

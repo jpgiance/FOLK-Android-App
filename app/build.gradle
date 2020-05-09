@@ -1,8 +1,6 @@
 apply plugin: 'com.android.application'
 
-def PROPUBLICA_API_KEY = '"' + PROPUBLICA_API_KEY + '"' ?: '"Api key not found"'
-def GOOGLE_API_KEY = '"' + GOOGLE_API_KEY + '"' ?: '"Api key not found"'
-def STRING = 'String'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -16,14 +14,14 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        each{type ->
-            type.buildConfigField STRING, 'PROPUBLICA_API_KEY', PROPUBLICA_API_KEY
-            type.buildConfigField STRING, 'GOOGLE_API_KEY', GOOGLE_API_KEY
 
-        }
     }
 
     buildTypes {
+        debug{
+            buildConfigField('String', "PROPUBLICA_API_KEY", PROPUBLICA_API_KEY)
+            buildConfigField('String', "GOOGLE_API_KEY", GOOGLE_API_KEY)
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

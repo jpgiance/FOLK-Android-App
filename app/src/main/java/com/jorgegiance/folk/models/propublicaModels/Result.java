@@ -1,8 +1,9 @@
-package com.jorgegiance.folk.models;
+package com.jorgegiance.folk.models.propublicaModels;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.jorgegiance.folk.models.propublicaModels.Member;
 
 public class Result {
 

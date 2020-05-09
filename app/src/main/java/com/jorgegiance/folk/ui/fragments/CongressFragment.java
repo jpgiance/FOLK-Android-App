@@ -19,28 +19,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.jorgegiance.folk.R;
 import com.jorgegiance.folk.adapters.MembersAdapter;
-import com.jorgegiance.folk.models.Member;
-import com.jorgegiance.folk.models.Person;
+import com.jorgegiance.folk.models.propublicaModels.Member;
 import com.jorgegiance.folk.ui.dialogs.StateFilterDialog;
-import com.jorgegiance.folk.viewmodels.MembersViewModel;
+import com.jorgegiance.folk.util.Utilities;
+import com.jorgegiance.folk.viewmodels.CongressViewModel;
 import com.jorgegiance.folk.viewmodels.PeopleActivityViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class LegislativeFragment extends Fragment implements View.OnClickListener{
+public class CongressFragment extends Fragment implements View.OnClickListener{
 
     //ui components
     private TextView filterSenate, filterCongress;
 
     private PeopleActivityViewModel peopleActivityViewModel;
-    private MembersViewModel membersViewModel;
+    private CongressViewModel congressViewModel;
     private Context ctx;
     private MembersAdapter adapterSenate, adapterCongress;
 
 
 
-    public LegislativeFragment() {
+    public CongressFragment() {
     }
 
     @Nullable
@@ -49,8 +50,6 @@ public class LegislativeFragment extends Fragment implements View.OnClickListene
 
         final View rootView = inflater.inflate(R.layout.fragment_legislative, container, false);
 
-        peopleActivityViewModel = new ViewModelProvider(getActivity()).get(PeopleActivityViewModel.class);
-        membersViewModel = new ViewModelProvider(getActivity()).get(MembersViewModel.class);
 
         filterCongress = rootView.findViewById(R.id.filter_congress);
         filterSenate = rootView.findViewById(R.id.filter_senate);
@@ -72,8 +71,19 @@ public class LegislativeFragment extends Fragment implements View.OnClickListene
 
 
 
-        initObservers();
+
         return rootView;
+    }
+
+    @Override
+    public void onActivityCreated( @Nullable Bundle savedInstanceState ) {
+        super.onActivityCreated(savedInstanceState);
+
+        peopleActivityViewModel = new ViewModelProvider(getActivity()).get(PeopleActivityViewModel.class);
+        congressViewModel = new ViewModelProvider(getActivity()).get(CongressViewModel.class);
+
+        initObservers();
+
     }
 
     @Override
@@ -100,9 +110,11 @@ public class LegislativeFragment extends Fragment implements View.OnClickListene
                             filterCongress.setText(
                                     getString(R.string.filter_text_start)
                                             + peopleActivityViewModel.getFilterState()
-                                            + getString(R.string.filter_text_end));
+                                            + getString(R.string.filter_text_end)
+                            );
                         }
 
+                        updateCongressMembers(peopleActivityViewModel.getFilterState());
                         peopleActivityViewModel.setStateFilterSelected(false);
 
                     }
@@ -113,9 +125,11 @@ public class LegislativeFragment extends Fragment implements View.OnClickListene
                             filterSenate.setText(
                                     getString(R.string.filter_text_start)
                                             + peopleActivityViewModel.getFilterState()
-                                            + getString(R.string.filter_text_end));
+                                            + getString(R.string.filter_text_end)
+                            );
                         }
 
+                        updateSenateMembers(peopleActivityViewModel.getFilterState());
                         peopleActivityViewModel.setStateFilterSelected(false);
 
                     }
@@ -127,20 +141,61 @@ public class LegislativeFragment extends Fragment implements View.OnClickListene
         });
 
 
-        membersViewModel.getSenateMembers().observe(getViewLifecycleOwner(), new Observer<List<Member>>() {
+        congressViewModel.getSenateMembers().observe(getViewLifecycleOwner(), new Observer<List<Member>>() {
             @Override
             public void onChanged( List<Member> members ) {
                 adapterSenate.setMembersList(members);
             }
         });
 
-        membersViewModel.getCongressMembers().observe(getViewLifecycleOwner(), new Observer<List<Member>>() {
+        congressViewModel.getCongressMembers().observe(getViewLifecycleOwner(), new Observer<List<Member>>() {
             @Override
             public void onChanged( List<Member> members ) {
                 adapterCongress.setMembersList(members);
             }
         });
     }
+
+    private void updateCongressMembers(String state) {
+
+        if (state.equals(getString(R.string.filter_all))){
+            adapterCongress.setMembersList(congressViewModel.getCongressMembers().getValue());
+        }else {
+            ArrayList<Member> members = new ArrayList<>();
+            String stateCode = Utilities.stateCode(state);
+
+            for (Member member: Objects.requireNonNull(congressViewModel.getCongressMembers().getValue())) {
+                if (member.getState().equals(stateCode)){
+                    members.add(member);
+                }
+            }
+
+            adapterCongress.setMembersList(members);
+        }
+
+
+    }
+
+    private void updateSenateMembers(String state) {
+
+        if (state.equals(getString(R.string.filter_all))){
+            adapterSenate.setMembersList(congressViewModel.getSenateMembers().getValue());
+        }else {
+            ArrayList<Member> members = new ArrayList<>();
+            String stateCode = Utilities.stateCode(state);
+
+            for (Member member: Objects.requireNonNull(congressViewModel.getSenateMembers().getValue())) {
+                if (member.getState().equals(stateCode)){
+                    members.add(member);
+                }
+            }
+
+            adapterSenate.setMembersList(members);
+        }
+
+
+    }
+
 
     private void setListener() {
         filterSenate.setOnClickListener(this);
