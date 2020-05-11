@@ -3,9 +3,11 @@ package com.jorgegiance.folk.repository;
 import android.app.Application;
 import android.util.Log;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.jorgegiance.folk.BuildConfig;
 import com.jorgegiance.folk.models.googlecivicModels.StateCabinet;
 import com.jorgegiance.folk.models.propublicaModels.ProPublicaApiResult;
@@ -26,10 +28,11 @@ public class AppRepository {
 
     private ProPublicaService proPublicaService;
     private GoogleCivicService googleCivicService;
+    private Application application;
 
     public AppRepository( Application application ) {
 
-
+        this.application = application;
         proPublicaService = ProPublicaCongressApiClient.getApiClient().create(ProPublicaService.class);
         googleCivicService = GoogleCivicInformationApiClient.getApiClient().create(GoogleCivicService.class);
 
@@ -49,14 +52,14 @@ public class AppRepository {
                 if (response.isSuccessful()){
                     senatorsList.setValue(response.body().getResults().get(0).getMembers());
                 }else {
-                    Log.d("Unsuccess Debug message", response.toString());
+                    showFailureDialog();
                 }
             }
 
             @Override
             public void onFailure( Call<ProPublicaApiResult> call, Throwable t ) {
                 senatorsList.setValue(null);
-                Log.d("failure Debug message", t.getMessage());
+                showFailureDialog();
             }
         });
         return senatorsList;
@@ -74,63 +77,14 @@ public class AppRepository {
                 if (response.isSuccessful()){
                     representativesList.setValue(response.body().getResults().get(0).getMembers());
                 }else {
-                    Log.d("Unsuccess Debug message", response.toString());
+                    showFailureDialog();
                 }
             }
 
             @Override
             public void onFailure( Call<ProPublicaApiResult> call, Throwable t ) {
                 representativesList.setValue(null);
-                Log.d("failure Debug message", t.getMessage());
-            }
-        });
-        return representativesList;
-    }
-
-
-    public LiveData<List<Member>> getSenatorByState(String state){
-
-        final MutableLiveData<List<Member>> senatorsList = new MutableLiveData<>();
-        proPublicaService.getSenateByState(state).enqueue(new Callback<ProPublicaApiResult>() {
-            @Override
-            public void onResponse( Call<ProPublicaApiResult> call, Response<ProPublicaApiResult> response ) {
-
-                if (response.isSuccessful()){
-                    senatorsList.setValue(response.body().getResults().get(0).getMembers());
-                }else {
-                    Log.d("Unsuccess Debug message", response.toString());
-                }
-            }
-
-            @Override
-            public void onFailure( Call<ProPublicaApiResult> call, Throwable t ) {
-                senatorsList.setValue(null);
-                Log.d("failure Debug message", t.getMessage());
-            }
-        });
-        return senatorsList;
-    }
-
-
-    public LiveData<List<Member>> getRepresentativeByState(String state){
-
-        final MutableLiveData<List<Member>> representativesList = new MutableLiveData<>();
-        proPublicaService.getRepresentativeByState(state).enqueue(new Callback<ProPublicaApiResult>() {
-
-            @Override
-            public void onResponse( Call<ProPublicaApiResult> call, Response<ProPublicaApiResult> response ) {
-
-                if (response.isSuccessful()){
-                    representativesList.setValue(response.body().getResults().get(0).getMembers());
-                }else {
-                    Log.d("Unsuccess Debug message", response.toString());
-                }
-            }
-
-            @Override
-            public void onFailure( Call<ProPublicaApiResult> call, Throwable t ) {
-                representativesList.setValue(null);
-                Log.d("failure Debug message", t.getMessage());
+                showFailureDialog();
             }
         });
         return representativesList;
@@ -147,14 +101,64 @@ public class AppRepository {
                 if (response.isSuccessful()){
                     result.setValue(response.body());
                 }else {
-                    Log.d("Unsuccess Debug message", response.toString());
+                    showFailureDialog();
                 }
             }
 
             @Override
             public void onFailure( Call<StateCabinet> call, Throwable t ) {
                 result.setValue(null);
-                Log.d("failure Debug message", t.getMessage());
+                showFailureDialog();
+            }
+        });
+
+        return result;
+    }
+
+
+    public LiveData<StateCabinet> getLocalOfficials( String address){
+
+        final MutableLiveData<StateCabinet> result = new MutableLiveData<>();
+
+        googleCivicService.getLocalOfficials(address, true, "locality","administrativeArea2", BuildConfig.GOOGLE_API_KEY).enqueue(new Callback<StateCabinet>() {
+            @Override
+            public void onResponse( Call<StateCabinet> call, Response<StateCabinet> response ) {
+                if (response.isSuccessful()){
+                    result.setValue(response.body());
+                }else {
+                    showFailureDialog();
+                }
+            }
+
+            @Override
+            public void onFailure( Call<StateCabinet> call, Throwable t ) {
+                result.setValue(null);
+                showFailureDialog();
+            }
+        });
+
+        return result;
+    }
+
+
+    public LiveData<StateCabinet> getLocalRepresentative( String address){
+
+        final MutableLiveData<StateCabinet> result = new MutableLiveData<>();
+
+        googleCivicService.getLocalRepresentative(address, true, "legislatorLowerBody", BuildConfig.GOOGLE_API_KEY).enqueue(new Callback<StateCabinet>() {
+            @Override
+            public void onResponse( Call<StateCabinet> call, Response<StateCabinet> response ) {
+                if (response.isSuccessful()){
+                    result.setValue(response.body());
+                }else {
+                    showFailureDialog();
+                }
+            }
+
+            @Override
+            public void onFailure( Call<StateCabinet> call, Throwable t ) {
+                result.setValue(null);
+                showFailureDialog();
             }
         });
 
@@ -172,14 +176,14 @@ public class AppRepository {
                 if (response.isSuccessful()){
                     result.setValue(response.body());
                 }else {
-                    Log.d("Unsuccess Debug message", response.toString());
+                    showFailureDialog();
                 }
             }
 
             @Override
             public void onFailure( Call<StateCabinet> call, Throwable t ) {
                 result.setValue(null);
-                Log.d("failure Debug message", t.getMessage());
+                showFailureDialog();
             }
         });
 
@@ -188,6 +192,13 @@ public class AppRepository {
     }
 
 
-
+    private void showFailureDialog(){
+        new MaterialAlertDialogBuilder(application.getApplicationContext())
+                .setTitle("Ups! Something went wrong")
+                .setMessage("Please check internet connection or try again later")
+                .setNegativeButton(android.R.string.no, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
 
 }

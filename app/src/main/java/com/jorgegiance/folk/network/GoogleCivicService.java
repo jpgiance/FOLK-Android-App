@@ -21,8 +21,28 @@ public interface GoogleCivicService {
     );
 
     @Headers("Accept: application/json")
+    @GET("representatives")
+    Call<StateCabinet> getLocalOfficials(
+            @Query("address") String address,
+            @Query("includeOffices") boolean offices,
+            @Query("levels") String locality,
+            @Query("levels") String levels,
+            @Query("key") String apiKey
+    );
+
+    @Headers("Accept: application/json")
+    @GET("representatives")
+    Call<StateCabinet> getLocalRepresentative(
+            @Query("address") String address,
+            @Query("includeOffices") boolean offices,
+            @Query("roles") String role,
+            @Query("key") String apiKey
+    );
+
+    @Headers("Accept: application/json")
     @GET("representatives/ocd-division%2Fcountry%3Aus?levels=country&roles=deputyHeadOfGovernment&roles=headOfGovernment&key=" + BuildConfig.GOOGLE_API_KEY)
     Call<StateCabinet> getHeadOfCountry();
+
 
 
 }

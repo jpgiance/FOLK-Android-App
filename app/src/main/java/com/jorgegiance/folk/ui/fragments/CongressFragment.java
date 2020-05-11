@@ -48,7 +48,7 @@ public class CongressFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView( @NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState ) {
 
-        final View rootView = inflater.inflate(R.layout.fragment_legislative, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_congress, container, false);
 
 
         filterCongress = rootView.findViewById(R.id.filter_congress);

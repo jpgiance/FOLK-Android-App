@@ -63,10 +63,10 @@
     </androidx.core.widget.NestedScrollView>
 
 
-    <com.google.android.material.bottomappbar.BottomAppBar
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:backgroundTint="#CC000000"
+        android:background="#CC000000"
         app:hideOnScroll="false"
         android:layout_gravity="bottom">
 
@@ -93,7 +93,7 @@
             android:layout_marginRight="20dp"
             android:src="@drawable/ic_group_user_folks"/>
 
-    </com.google.android.material.bottomappbar.BottomAppBar>
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

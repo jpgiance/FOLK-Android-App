@@ -47,7 +47,7 @@ public class StatesFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView( @NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState ) {
 
-        final View rootView = inflater.inflate(R.layout.fragment_executive, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_states, container, false);
 
         presidentImage = rootView.findViewById(R.id.image_president);
         vicePresidentImage = rootView.findViewById(R.id.image_vice_president);
@@ -123,6 +123,8 @@ public class StatesFragment extends Fragment implements View.OnClickListener{
                 populateFragmentUi(stateCabinet);
             }
         });
+
+
     }
 
     private void populateFragmentUi(StateCabinet stateCabinet) {

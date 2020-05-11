@@ -57,12 +57,12 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.bottomappbar.BottomAppBar
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:backgroundTint="#CC000000"
-        app:hideOnScroll="true">
+        android:background="#CC000000"
+        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior">
 
         <ImageView
             android:id="@+id/icon_user"
@@ -87,7 +87,7 @@
             android:layout_marginRight="20dp"
             android:src="@drawable/ic_group_user_folks" />
 
-    </com.google.android.material.bottomappbar.BottomAppBar>
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

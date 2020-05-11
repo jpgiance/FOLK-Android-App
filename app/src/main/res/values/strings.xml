@@ -30,6 +30,12 @@
     <string name="vote_button">VOTE</string>
     <string name="tab_content">Content</string>
     <string name="tab_debate">Debate</string>
+    <string name="address">Address</string>
+    <string name="state">State</string>
+    <string name="coma_separator">,</string>
+    <string name="locality_title">Type locality:</string>
+    <string name="search">Search</string>
+
 
     <string name="republican_party">Rep</string>
     <string name="democratic_party">Dem</string>

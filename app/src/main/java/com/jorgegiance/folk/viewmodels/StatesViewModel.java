@@ -5,7 +5,6 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import com.jorgegiance.folk.R;
 import com.jorgegiance.folk.models.googlecivicModels.StateCabinet;
@@ -15,6 +14,7 @@ public class StatesViewModel extends AndroidViewModel {
 
     private AppRepository repository;
     private LiveData<StateCabinet> stateCabinet;
+    private LiveData<StateCabinet> localOfficials;
     private Application application;
 
     public StatesViewModel( @NonNull Application application ) {
@@ -44,6 +44,9 @@ public class StatesViewModel extends AndroidViewModel {
     public LiveData<StateCabinet> getStateCabinet() {
         return stateCabinet;
     }
+
+
+
 
 
 
