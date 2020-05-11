@@ -1,13 +1,10 @@
 package com.jorgegiance.folk.repository;
 
 import android.app.Application;
-import android.util.Log;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.jorgegiance.folk.BuildConfig;
 import com.jorgegiance.folk.models.googlecivicModels.StateCabinet;
 import com.jorgegiance.folk.models.propublicaModels.ProPublicaApiResult;
@@ -52,14 +49,12 @@ public class AppRepository {
                 if (response.isSuccessful()){
                     senatorsList.setValue(response.body().getResults().get(0).getMembers());
                 }else {
-                    showFailureDialog();
                 }
             }
 
             @Override
             public void onFailure( Call<ProPublicaApiResult> call, Throwable t ) {
                 senatorsList.setValue(null);
-                showFailureDialog();
             }
         });
         return senatorsList;
@@ -77,14 +72,12 @@ public class AppRepository {
                 if (response.isSuccessful()){
                     representativesList.setValue(response.body().getResults().get(0).getMembers());
                 }else {
-                    showFailureDialog();
                 }
             }
 
             @Override
             public void onFailure( Call<ProPublicaApiResult> call, Throwable t ) {
                 representativesList.setValue(null);
-                showFailureDialog();
             }
         });
         return representativesList;
@@ -101,14 +94,12 @@ public class AppRepository {
                 if (response.isSuccessful()){
                     result.setValue(response.body());
                 }else {
-                    showFailureDialog();
                 }
             }
 
             @Override
             public void onFailure( Call<StateCabinet> call, Throwable t ) {
                 result.setValue(null);
-                showFailureDialog();
             }
         });
 
@@ -126,14 +117,12 @@ public class AppRepository {
                 if (response.isSuccessful()){
                     result.setValue(response.body());
                 }else {
-                    showFailureDialog();
                 }
             }
 
             @Override
             public void onFailure( Call<StateCabinet> call, Throwable t ) {
                 result.setValue(null);
-                showFailureDialog();
             }
         });
 
@@ -151,14 +140,12 @@ public class AppRepository {
                 if (response.isSuccessful()){
                     result.setValue(response.body());
                 }else {
-                    showFailureDialog();
                 }
             }
 
             @Override
             public void onFailure( Call<StateCabinet> call, Throwable t ) {
                 result.setValue(null);
-                showFailureDialog();
             }
         });
 
@@ -176,14 +163,12 @@ public class AppRepository {
                 if (response.isSuccessful()){
                     result.setValue(response.body());
                 }else {
-                    showFailureDialog();
                 }
             }
 
             @Override
             public void onFailure( Call<StateCabinet> call, Throwable t ) {
                 result.setValue(null);
-                showFailureDialog();
             }
         });
 
@@ -192,13 +177,6 @@ public class AppRepository {
     }
 
 
-    private void showFailureDialog(){
-        new MaterialAlertDialogBuilder(application.getApplicationContext())
-                .setTitle("Ups! Something went wrong")
-                .setMessage("Please check internet connection or try again later")
-                .setNegativeButton(android.R.string.no, null)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
-    }
+
 
 }
