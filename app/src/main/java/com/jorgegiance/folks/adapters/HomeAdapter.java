@@ -22,6 +22,7 @@ import java.util.ArrayList;
 public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private HomeAdapterOnClickHandler handler;
+    private OnBottomReachedListener mOnBottomReachedListener;
     private Context ctx;
     private ArrayList<Item> homeItemsList;
     private static int TYPE_INFO = 1;
@@ -40,6 +41,17 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.homeItemsList = homeItemsList;
         notifyDataSetChanged();
     }
+
+    public void addToHomeItemList(ArrayList<Item> homeItemsList ){
+        this.homeItemsList.addAll(homeItemsList);
+        notifyDataSetChanged();
+    }
+
+    public void addOnBottomReachedListener(OnBottomReachedListener onBottomReachedListener){
+        this.mOnBottomReachedListener = onBottomReachedListener;
+    }
+
+
 
 
     @NonNull
@@ -112,6 +124,10 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
         if (getItemViewType(position) == TYPE_LIST){
             ((ListHolder) holder).populateView(homeItemsList.get(position));
+        }
+
+        if (position == homeItemsList.size()-1){
+            mOnBottomReachedListener.onBottomReached(position);
         }
     }
 
@@ -307,5 +323,9 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public interface HomeAdapterOnClickHandler {
         void onItemClicked( News news );
+    }
+
+    public interface OnBottomReachedListener{
+        void onBottomReached(int position);
     }
 }

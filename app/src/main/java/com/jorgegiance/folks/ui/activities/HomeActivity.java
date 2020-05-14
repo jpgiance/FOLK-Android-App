@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -28,17 +29,20 @@ import com.jorgegiance.folks.models.firebaseModels.News;
 import com.jorgegiance.folks.models.firebaseModels.Page;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener, HomeAdapter.HomeAdapterOnClickHandler {
 
     // UI components
     private AppBarLayout appBarLayout;
     private MaterialToolbar appBar;
-    private ContentLoadingProgressBar mProgressBar;
-    private CollapsingToolbarLayout collapsingToolbarLayout;
+    private ProgressBar mProgressBar;
     private ImageView userButton, homeButton, peopleButton;
 
     private HomeAdapter adapter;
+    private RecyclerView recycler;
+
+    private Long currentPage = null;
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mLatestPageReference;
@@ -64,35 +68,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         userButton = findViewById(R.id.icon_user);
         homeButton = findViewById(R.id.icon_home);
         peopleButton = findViewById(R.id.icon_peopleGroup);
-        collapsingToolbarLayout = findViewById(R.id.collapsingToolbarLayout);
         mProgressBar = findViewById(R.id.home_progressBar);
 
-        appBar.setVisibility(View.GONE);
-        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
 
-
-            @Override
-            public void onOffsetChanged( AppBarLayout appBarLayout, int verticalOffset ) {
-
-                if ( Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()-appBar.getHeight()){
-
-                    appBar.setVisibility(View.VISIBLE);
-
-                }else{
-
-                    appBar.setVisibility(View.GONE);
-
-                };
-
-
-            }
-        });
 
 
 
         setIconColor();
 
-        RecyclerView recycler = findViewById(R.id.feed_recycler);
+        recycler = findViewById(R.id.feed_recycler);
         adapter = new HomeAdapter(this, this);
         recycler.setAdapter(adapter);
         recycler.setLayoutManager(new LinearLayoutManager(this));
@@ -103,8 +87,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         lastValueListener = new ValueEventListener() {
             @Override
             public void onDataChange( @NonNull DataSnapshot dataSnapshot ) {
-                Long lastPage = (Long) dataSnapshot.getValue();
-                loadPage(lastPage);
+               Long last = (Long) dataSnapshot.getValue();
+
+                if (last != null){
+                    if (currentPage == null){
+                        currentPage = last;
+                        loadPage(currentPage);
+                    }else{
+                        // Show notification "New stories"
+                    }
+
+                }
+
             }
 
             @Override
@@ -113,18 +107,30 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         };
         mLatestPageReference.addValueEventListener(lastValueListener);
+        mProgressBar.setVisibility(View.VISIBLE);
 
     }
 
-    private void loadPage( long lastPage ) {
-        DatabaseReference mPageDatabaseReference = mFirebaseDatabase.getReference().child("pages").child(String.valueOf(lastPage));
+    private void loadPage( final long pageNumber ) {
+        mProgressBar.setVisibility(View.VISIBLE);
+        DatabaseReference mPageDatabaseReference = mFirebaseDatabase.getReference().child("pages").child(String.valueOf(pageNumber));
 
         mPageDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange( @NonNull DataSnapshot dataSnapshot ) {
                 Page homePage = dataSnapshot.getValue(Page.class);
 
-                adapter.setHomeItemsList((ArrayList<Item>) homePage.getItems());
+                if (homePage != null){
+                    if (currentPage == pageNumber){
+                        adapter.setHomeItemsList((ArrayList<Item>) homePage.getItems());
+                    }else {
+                        adapter.addToHomeItemList((ArrayList<Item>) homePage.getItems());
+                        currentPage = pageNumber;
+                    }
+
+                    mProgressBar.setVisibility(View.GONE);
+                }
+
             }
 
             @Override
@@ -145,6 +151,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         userButton.setOnClickListener(this);
         homeButton.setOnClickListener(this);
         peopleButton.setOnClickListener(this);
+
+        adapter.addOnBottomReachedListener(new HomeAdapter.OnBottomReachedListener() {
+            @Override
+            public void onBottomReached( int position ) {
+                if (currentPage > 0){
+                    loadPage(currentPage-1);
+                }
+            }
+        });
+
 
 
     }
