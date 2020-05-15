@@ -1,6 +1,7 @@
 package com.jorgegiance.folks.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,12 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.snackbar.Snackbar;
 import com.jorgegiance.folks.R;
 import com.jorgegiance.folks.adapters.HomeAdapter;
 import com.jorgegiance.folks.models.firebaseModels.Item;
@@ -30,6 +31,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     // UI components
     private ProgressBar mProgressBar;
     private ImageView userButton, homeButton, peopleButton, topButton;
+    private CoordinatorLayout coordinatorLayout;
 
     private HomeAdapter adapter;
     private RecyclerView recycler;
@@ -57,6 +59,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         peopleButton = findViewById(R.id.icon_peopleGroup);
         mProgressBar = findViewById(R.id.home_progressBar);
         topButton = findViewById(R.id.icon_top_arrow);
+        coordinatorLayout = findViewById(R.id.home_coordinator_layout);
 
 
 
@@ -91,11 +94,33 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         loadPage(lastPage);
                     }else{
                         // Show notification "New stories"
+
+                        showSnackbarNewStories(lastPage);
                     }
 
                 }
             }
         });
+    }
+
+    private void showSnackbarNewStories( final Long lastPage ) {
+        Snackbar snackbar = Snackbar
+                .make(coordinatorLayout, getString(R.string.snackbar_title), Snackbar.LENGTH_INDEFINITE)
+                .setAction(getString(R.string.snackbar_action), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mHomeActivityViewModel.setCurrentPage(lastPage);
+                        loadPage(lastPage);
+                    }
+                });
+
+        CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) snackbar.getView().getLayoutParams();
+        layoutParams.setAnchorId(R.id.home_bottom_navigation);//Id for your bottomNavBar or TabLayout
+        layoutParams.anchorGravity = Gravity.TOP;
+        layoutParams.gravity = Gravity.TOP;
+        snackbar.getView().setLayoutParams(layoutParams);
+
+        snackbar.show();
     }
 
     private void loadPage( final long pageNumber ) {

@@ -50,6 +50,9 @@
     <string name="tab_following">Following</string>
     <string name="tab_settings">Settings</string>
 
+    <string name="snackbar_title">New stories added</string>
+    <string name="snackbar_action">VIEW</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
