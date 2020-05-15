@@ -1,8 +1,8 @@
 package com.jorgegiance.folks.ui.activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.widget.ContentLoadingProgressBar;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,62 +13,50 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.jorgegiance.folks.R;
 import com.jorgegiance.folks.adapters.HomeAdapter;
 import com.jorgegiance.folks.models.firebaseModels.Item;
 import com.jorgegiance.folks.models.firebaseModels.News;
 import com.jorgegiance.folks.models.firebaseModels.Page;
+import com.jorgegiance.folks.util.Constants;
+import com.jorgegiance.folks.viewmodels.HomeActivityViewModel;
+import com.jorgegiance.folks.viewmodels.ItemNewsViewModel;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener, HomeAdapter.HomeAdapterOnClickHandler {
 
     // UI components
-    private AppBarLayout appBarLayout;
-    private MaterialToolbar appBar;
     private ProgressBar mProgressBar;
-    private ImageView userButton, homeButton, peopleButton;
+    private ImageView userButton, homeButton, peopleButton, topButton;
 
     private HomeAdapter adapter;
     private RecyclerView recycler;
 
-    private Long currentPage = null;
 
-    private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mLatestPageReference;
-    private ChildEventListener mChildEventListener;
-    private ValueEventListener lastValueListener;
-    private FirebaseAuth mFirebaseAuth;
-    private FirebaseAuth.AuthStateListener mAuthStateListener;
+    private ItemNewsViewModel mItemNewsViewModel;
+    private HomeActivityViewModel mHomeActivityViewModel;
+
+//    private FirebaseAuth mFirebaseAuth;
+//    private FirebaseAuth.AuthStateListener mAuthStateListener;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        // Initialize Firebase components
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mFirebaseAuth = FirebaseAuth.getInstance();
+        mItemNewsViewModel = new ViewModelProvider(this).get(ItemNewsViewModel.class);
+        mHomeActivityViewModel = new ViewModelProvider(this).get(HomeActivityViewModel.class);
 
 
-        mLatestPageReference = mFirebaseDatabase.getReference().child("pages").child("last");
+//        mFirebaseAuth = FirebaseAuth.getInstance();
 
-        appBarLayout = findViewById(R.id.appBarLayout);
-        appBar = findViewById(R.id.toolbar);
         userButton = findViewById(R.id.icon_user);
         homeButton = findViewById(R.id.icon_home);
         peopleButton = findViewById(R.id.icon_peopleGroup);
         mProgressBar = findViewById(R.id.home_progressBar);
+        topButton = findViewById(R.id.icon_top_arrow);
 
 
 
@@ -84,58 +72,48 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         setListeners();
 
-        lastValueListener = new ValueEventListener() {
-            @Override
-            public void onDataChange( @NonNull DataSnapshot dataSnapshot ) {
-               Long last = (Long) dataSnapshot.getValue();
+        mProgressBar.setVisibility(View.VISIBLE);
+        observeLastPage();
 
-                if (last != null){
-                    if (currentPage == null){
-                        currentPage = last;
-                        loadPage(currentPage);
+    }
+
+
+
+    private void observeLastPage() {
+        mHomeActivityViewModel.setCurrentPage(Constants.initialCurrentPage);
+        mItemNewsViewModel.getLastPage().observe(this, new Observer<Long>() {
+            @Override
+            public void onChanged( Long lastPage ) {
+
+                if (lastPage != null){
+                    if (mHomeActivityViewModel.getCurrentPage().getValue() == Constants.initialCurrentPage){
+                        mHomeActivityViewModel.setCurrentPage(lastPage);
+                        loadPage(lastPage);
                     }else{
                         // Show notification "New stories"
                     }
 
                 }
-
             }
-
-            @Override
-            public void onCancelled( @NonNull DatabaseError databaseError ) {
-
-            }
-        };
-        mLatestPageReference.addValueEventListener(lastValueListener);
-        mProgressBar.setVisibility(View.VISIBLE);
-
+        });
     }
 
     private void loadPage( final long pageNumber ) {
         mProgressBar.setVisibility(View.VISIBLE);
-        DatabaseReference mPageDatabaseReference = mFirebaseDatabase.getReference().child("pages").child(String.valueOf(pageNumber));
 
-        mPageDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        mItemNewsViewModel.getPage(pageNumber).observe(this, new Observer<Page>() {
             @Override
-            public void onDataChange( @NonNull DataSnapshot dataSnapshot ) {
-                Page homePage = dataSnapshot.getValue(Page.class);
-
-                if (homePage != null){
-                    if (currentPage == pageNumber){
-                        adapter.setHomeItemsList((ArrayList<Item>) homePage.getItems());
+            public void onChanged( Page page ) {
+                if (page != null){
+                    if (mHomeActivityViewModel.getCurrentPage().getValue() == pageNumber){
+                        adapter.setHomeItemsList((ArrayList<Item>) page.getItems());
                     }else {
-                        adapter.addToHomeItemList((ArrayList<Item>) homePage.getItems());
-                        currentPage = pageNumber;
+                        adapter.addToHomeItemList((ArrayList<Item>) page.getItems());
+                        mHomeActivityViewModel.setCurrentPage(pageNumber);
                     }
 
                     mProgressBar.setVisibility(View.GONE);
                 }
-
-            }
-
-            @Override
-            public void onCancelled( @NonNull DatabaseError databaseError ) {
-
             }
         });
     }
@@ -151,13 +129,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         userButton.setOnClickListener(this);
         homeButton.setOnClickListener(this);
         peopleButton.setOnClickListener(this);
+        topButton.setOnClickListener(this);
 
         adapter.addOnBottomReachedListener(new HomeAdapter.OnBottomReachedListener() {
             @Override
             public void onBottomReached( int position ) {
-                if (currentPage > 0){
-                    loadPage(currentPage-1);
-                }
+               if ( mHomeActivityViewModel.getCurrentPage() != null) {
+                   if (mHomeActivityViewModel.getCurrentPage().getValue() > 0) {
+                       loadPage(mHomeActivityViewModel.getCurrentPage().getValue() - 1);
+                   }
+               }
             }
         });
 
@@ -177,7 +158,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.icon_peopleGroup:
                 transitionToPeopleScreen();
                 break;
+            case R.id.icon_top_arrow:
+                transitionToTopScreen();
+                break;
         }
+    }
+
+    private void transitionToTopScreen() {
+        recycler.getLayoutManager().scrollToPosition(0);
     }
 
     private void transitionToHomeScreen() {
