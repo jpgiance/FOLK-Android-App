@@ -7,8 +7,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.jorgegiance.folks.ContentFragment;
-import com.jorgegiance.folks.DebateFragment;
+import com.jorgegiance.folks.ui.fragments.ContentFragment;
+import com.jorgegiance.folks.ui.fragments.DebateFragment;
 
 public class DetailPagerAdapter extends FragmentStateAdapter {
 

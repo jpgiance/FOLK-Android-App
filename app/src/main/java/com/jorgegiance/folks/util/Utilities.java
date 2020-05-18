@@ -1,5 +1,10 @@
 package com.jorgegiance.folks.util;
 
+import android.annotation.SuppressLint;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -119,5 +124,13 @@ public class Utilities {
         return states.get(state);
     }
 
+    public static String time2Date( long time){
+
+        @SuppressLint("SimpleDateFormat") DateFormat formatter = new SimpleDateFormat("MMM dd, yyyy");
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(time);
+        return  (formatter.format(calendar.getTime()));
+    }
 
 }

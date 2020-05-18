@@ -14,13 +14,27 @@
         android:layout_height="wrap_content"
         style="@style/FolksThemeDark">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:drawableEnd="@drawable/ic_log_out"
+            android:drawablePadding="5dp"
+            android:text="@string/log_out"
+            android:gravity="top|right"
+            tools:ignore="RtlHardcoded" />
+
 
         <ImageView
             android:id="@+id/icon_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:src="@drawable/ic_logo_folks" />
+            android:src="@drawable/ic_logo_folks"
+            android:contentDescription="@string/logo_description" />
+
+
+
 
         <androidx.cardview.widget.CardView
             android:layout_width="150dp"
@@ -34,7 +48,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:src="@drawable/pence"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/user_picture_description" />
 
         </androidx.cardview.widget.CardView>
 
@@ -71,15 +86,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|left"
-            android:layout_marginLeft="20dp"
-            android:src="@drawable/ic_user_folks"/>
+            android:layout_marginStart="20dp"
+            android:src="@drawable/ic_user_folks"
+            tools:ignore="RtlHardcoded"
+            android:contentDescription="@string/user_screen_button_description" />
 
         <ImageView
             android:id="@+id/icon_home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/ic_home_folks"/>
+            android:src="@drawable/ic_home_folks"
+            android:contentDescription="@string/home_screen_button_description" />
 
         <ImageView
             android:id="@+id/icon_peopleGroup"
@@ -87,7 +105,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|right"
             android:layout_marginRight="20dp"
-            android:src="@drawable/ic_group_user_folks"/>
+            android:src="@drawable/ic_group_user_folks"
+            tools:ignore="RtlHardcoded"
+            android:contentDescription="@string/people_screen_button_description" />
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 

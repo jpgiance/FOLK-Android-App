@@ -18,7 +18,7 @@
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textColor="@android:color/white"
-        android:backgroundTint="@color/colorAccent"
+        android:background="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +41,8 @@
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             android:src="@drawable/trump"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@tools:sample/avatars"
+            android:contentDescription="@string/president_picture_description" />
 
 
     </androidx.cardview.widget.CardView>
@@ -91,7 +92,8 @@
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             android:src="@drawable/pence"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@tools:sample/avatars"
+            android:contentDescription="@string/vice_president_picture_description" />
 
     </androidx.cardview.widget.CardView>
 

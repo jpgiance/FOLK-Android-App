@@ -22,7 +22,7 @@
         android:id="@+id/profile_name_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="30dp"
         android:text="@string/profile_name"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -32,7 +32,7 @@
         android:id="@+id/profile_email_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="40dp"
         android:text="@string/profile_email"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -42,7 +42,7 @@
         android:id="@+id/profile_age_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="40dp"
         android:text="@string/profile_age"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -52,7 +52,7 @@
         android:id="@+id/profile_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="28dp"
+        android:layout_marginStart="28dp"
         android:layout_marginTop="212dp"
         android:text="@string/profile_location"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
@@ -63,7 +63,7 @@
         android:id="@+id/profile_location_city_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="30dp"
         android:text="@string/profile_location_city"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -73,7 +73,7 @@
         android:id="@+id/profile_location_state_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="40dp"
         android:text="@string/profile_location_state"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -83,7 +83,7 @@
         android:id="@+id/profile_location_country_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="40dp"
         android:text="@string/profile_location_country"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -93,7 +93,7 @@
         android:id="@+id/profile_location_zip_code_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="40dp"
         android:text="@string/profile_location_zip_code"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -114,7 +114,8 @@
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
         app:layout_constraintStart_toEndOf="@+id/profile_name_label"
         app:layout_constraintTop_toBottomOf="@+id/profile_title"
-        tools:text="Jorge Andres" />
+        android:autofillHints="@string/name_hint"
+        android:hint="@string/name_hint"/>
 
     <EditText
         android:id="@+id/profile_edit_email"
@@ -126,7 +127,8 @@
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
         app:layout_constraintStart_toEndOf="@+id/profile_email_label"
         app:layout_constraintTop_toBottomOf="@+id/profile_title"
-        tools:text="jpgiance@gmail.com"/>
+        android:autofillHints="@string/email_hint"
+        android:hint="@string/email_hint"/>
 
     <EditText
         android:id="@+id/profile_edit_age"
@@ -138,7 +140,8 @@
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
         app:layout_constraintStart_toEndOf="@+id/profile_age_label"
         app:layout_constraintTop_toBottomOf="@+id/profile_title"
-        tools:text="27/11/1990"/>
+        android:autofillHints="@string/date_of_birth_hint"
+        android:hint="@string/date_of_birth_hint"/>
 
     <EditText
         android:id="@+id/profile_edit_city"
@@ -150,7 +153,8 @@
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
         app:layout_constraintStart_toEndOf="@+id/profile_name_label"
         app:layout_constraintTop_toBottomOf="@+id/profile_location"
-        tools:text="Austin" />
+        android:autofillHints="@string/city_hint"
+        android:hint="@string/city_hint"/>
 
     <EditText
         android:id="@+id/profile_edit_state"
@@ -162,7 +166,8 @@
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
         app:layout_constraintStart_toEndOf="@+id/profile_location_state_label"
         app:layout_constraintTop_toBottomOf="@+id/profile_location"
-        tools:text="Texas"/>
+        android:autofillHints="@string/state_hint"
+        android:hint="@string/state_hint"/>
 
     <EditText
         android:id="@+id/profile_edit_country"
@@ -174,7 +179,8 @@
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
         app:layout_constraintStart_toEndOf="@+id/profile_location_country_label"
         app:layout_constraintTop_toBottomOf="@+id/profile_location"
-        tools:text="USA"/>
+        android:autofillHints="@string/country_hint"
+        android:hint="@string/country_hint"/>
 
     <EditText
         android:id="@+id/profile_edit_zipCode"
@@ -186,7 +192,8 @@
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
         app:layout_constraintStart_toEndOf="@+id/profile_location_zip_code_label"
         app:layout_constraintTop_toBottomOf="@+id/profile_location"
-        tools:text="78735"/>
+        android:autofillHints="@string/zip_code_hint"
+        android:hint="@string/zip_code_hint"/>
 
 
 

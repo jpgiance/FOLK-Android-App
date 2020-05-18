@@ -5,68 +5,25 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ContentFragment">
+    tools:context=".ui.fragments.ContentFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/news_body"
+        style="android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment"
-        android:textSize="30sp"/>
+        android:layout_marginTop="@dimen/detail_body_top_margin"
+        android:layout_marginStart="@dimen/detail_inner_horiz_margin_left"
+        android:layout_marginEnd="@dimen/detail_inner_horiz_margin"
+        android:lineSpacingMultiplier="@fraction/detail_body_line_spacing_multiplier"
+        android:paddingBottom="@dimen/detail_body_bottom_margin"
+        android:autoLink="all"
+        android:textColor="@color/colorDarkGrey"
+        android:textColorLink="@color/colorLinkBlue"
+        android:textSize="@dimen/detail_body_text_size" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment"
-        android:textSize="30sp"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment"
-        android:textSize="30sp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment"
-        android:textSize="30sp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment"
-        android:textSize="30sp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment"
-        android:textSize="30sp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment"
-        android:textSize="30sp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment"
-        android:textSize="30sp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment"
-        android:textSize="30sp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment"
-        android:textSize="30sp"/>
 
 
 

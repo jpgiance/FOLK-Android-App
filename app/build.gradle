@@ -18,7 +18,7 @@ android {
     }
 
     buildTypes {
-        debug{
+        debug {
             buildConfigField('String', "PROPUBLICA_API_KEY", PROPUBLICA_API_KEY)
             buildConfigField('String', "GOOGLE_API_KEY", GOOGLE_API_KEY)
         }
@@ -28,6 +28,10 @@ android {
         }
     }
 
+}
+
+repositories {
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -76,6 +80,8 @@ dependencies {
 
     // FirebaseUI
     implementation 'com.firebaseui:firebase-ui-auth:6.2.1'
+
+    // MPAndroidChart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }
 apply plugin: 'com.google.gms.google-services'
-

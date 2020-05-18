@@ -2,6 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:background="@color/colorPrimaryDark">
@@ -22,14 +23,17 @@
                 android:id="@+id/icon_logo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_logo_folks" />
+                android:src="@drawable/ic_logo_folks"
+                android:contentDescription="@string/logo_description" />
 
             <ImageView
                 android:id="@+id/icon_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|right"
-                android:src="@drawable/ic_info" />
+                android:src="@drawable/ic_info"
+                android:contentDescription="@string/information_button_description"
+                tools:ignore="RtlHardcoded" />
 
 
         </com.google.android.material.appbar.MaterialToolbar>
@@ -75,15 +79,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|left"
-            android:layout_marginLeft="20dp"
-            android:src="@drawable/ic_user_folks"/>
+            android:layout_marginStart="20dp"
+            android:src="@drawable/ic_user_folks"
+            tools:ignore="RtlHardcoded"
+            android:contentDescription="@string/user_screen_button_description" />
 
         <ImageView
             android:id="@+id/icon_home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/ic_home_folks"/>
+            android:src="@drawable/ic_home_folks"
+            android:contentDescription="@string/home_screen_button_description" />
 
         <ImageView
             android:id="@+id/icon_peopleGroup"
@@ -91,7 +98,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|right"
             android:layout_marginRight="20dp"
-            android:src="@drawable/ic_group_user_folks"/>
+            android:src="@drawable/ic_group_user_folks"
+            tools:ignore="RtlHardcoded"
+            android:contentDescription="@string/people_screen_button_description" />
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 

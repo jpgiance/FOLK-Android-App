@@ -10,6 +10,7 @@
 
 
     <TextView
+        android:id="@+id/news_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -17,24 +18,23 @@
         android:layout_marginStart= "20dp"
         android:textColor="@color/colorPrimary"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
-        android:textStyle="italic"
-        android:text="Trump vs Biden First presidential debate winner"/>
+        android:textStyle="italic"/>
 
     <TextView
+        android:id="@+id/news_author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd= "20dp"
         android:layout_marginStart= "20dp"
         android:textColor="@color/colorGrey"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-        android:textStyle="bold"
-        android:text="By Tony Owes, CNN"/>
+        android:textStyle="bold"/>
 
     <TextView
+        android:id="@+id/news_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/colorGrey"
-        android:text="21d ago"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="20dp"
@@ -45,14 +45,18 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:scaleType="centerInside"
-        android:backgroundTint="@color/colorWhite"
-        android:src="@drawable/gina"/>
+        android:background="@color/colorWhite"
+        android:src="@drawable/gina"
+        android:contentDescription="@string/detail_poster_description" />
 
 
 
     <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/chart_fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:name="com.jorgegiance.folks.ui.fragments.ChartFragment"/>
 
 
     <Button
@@ -61,7 +65,7 @@
         android:text="@string/vote_button"
         android:layout_gravity="center"
         android:layout_margin="20dp"
-        android:backgroundTint="@color/colorAccent"
+        android:background="@color/colorAccent"
         android:textColor="@color/colorWhite"/>
 
 

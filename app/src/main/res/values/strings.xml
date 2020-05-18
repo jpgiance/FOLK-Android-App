@@ -55,6 +55,27 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="log_out">Log out</string>
+    <string name="detail_poster_description">This is the article poster picture</string>
+    <string name="article_poster_description">Article poster</string>
+    <string name="back_button_description">Return to previous screen button</string>
+    <string name="logo_description">App logo image</string>
+    <string name="share_button_description">share this article button</string>
+    <string name="user_screen_button_description">user screen button</string>
+    <string name="home_screen_button_description">home screen button</string>
+    <string name="people_screen_button_description">people screen button</string>
+    <string name="jump_to_top_button_description">jump to top button</string>
+    <string name="information_button_description">information button</string>
+    <string name="user_picture_description">user picture</string>
+    <string name="name_hint">name</string>
+    <string name="email_hint">email</string>
+    <string name="date_of_birth_hint">date of birth</string>
+    <string name="city_hint">city</string>
+    <string name="state_hint">state</string>
+    <string name="country_hint">country</string>
+    <string name="zip_code_hint">zip code</string>
+    <string name="president_picture_description">this is a picture of the president or the governor depending on the filter selected</string>
+    <string name="vice_president_picture_description">this is a picture of the vice president or lieutenant governor depending on the filter selected</string>
 
 
 </resources>

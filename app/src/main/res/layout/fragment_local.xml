@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:orientation="vertical"
-        android:elevation="10dp"
         android:overScrollMode="never">
 
         <TextView
@@ -42,7 +41,8 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 android:textColor="@color/colorWhite"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/locality_title" />
+                app:layout_constraintTop_toBottomOf="@+id/locality_title"
+                android:autofillHints="@string/address" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -80,7 +80,7 @@
             android:layout_marginStart="20dp"
             android:textColor="@color/colorWhite"
             android:text="@string/search"
-            android:backgroundTint="@color/colorAccent"/>
+            android:background="@color/colorAccent"/>
 
 
 

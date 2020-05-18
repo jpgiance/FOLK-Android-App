@@ -2,4 +2,8 @@
 <resources>
     <dimen name="home_recycler_margin_start">160dp</dimen>
     <dimen name="home_recycler_margin_end">160dp</dimen>
+
+    <!-- list -->
+    <dimen name="thumbnail_width">250dp</dimen>
+    <dimen name="thumbnail_height">190dp</dimen>
 </resources>
