@@ -13,6 +13,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,20 +22,23 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.jorgegiance.folks.R;
 import com.jorgegiance.folks.adapters.DetailPagerAdapter;
+import com.jorgegiance.folks.util.NotificationUtil;
 import com.jorgegiance.folks.util.Utilities;
 import com.jorgegiance.folks.viewmodels.DetailActivityViewModel;
 
 
-public class DetailFragment extends Fragment {
+public class DetailFragment extends Fragment implements View.OnClickListener{
 
     // UI components
     private ViewPager2 viewPager;
     private TabLayout tabs;
     private TextView newsTitle, newsAuthor, newsTime;
+    private ImageView newsPoster;
+    private Button voteButton;
 
     private Context ctx;
     private DetailActivityViewModel mDetailActivityViewModel;
-    private ImageView newsPoster;
+
 
 
 
@@ -63,6 +67,9 @@ public class DetailFragment extends Fragment {
         newsAuthor = rootView.findViewById(R.id.news_author);
         newsTime = rootView.findViewById(R.id.news_time);
         newsPoster = rootView.findViewById(R.id.news_poster);
+        voteButton = rootView.findViewById(R.id.vote_button);
+
+        voteButton.setOnClickListener(this);
 
         DetailPagerAdapter detailPagerAdapter = new DetailPagerAdapter(getActivity(), getContext());
         viewPager.setAdapter(detailPagerAdapter);
@@ -115,5 +122,12 @@ public class DetailFragment extends Fragment {
 
 
 
+    }
+
+    @Override
+    public void onClick( View v ) {
+        if (v.getId() == R.id.vote_button){
+            NotificationUtil.setNewStoriesNotification(ctx);
+        }
     }
 }

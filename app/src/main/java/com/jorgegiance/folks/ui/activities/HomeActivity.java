@@ -6,8 +6,19 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.work.Constraints;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.ExistingWorkPolicy;
+import androidx.work.NetworkType;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkInfo;
+import androidx.work.WorkManager;
+import androidx.work.Worker;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.Network;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -21,10 +32,13 @@ import com.jorgegiance.folks.models.firebaseModels.Item;
 import com.jorgegiance.folks.models.firebaseModels.News;
 import com.jorgegiance.folks.models.firebaseModels.Page;
 import com.jorgegiance.folks.util.Constants;
+import com.jorgegiance.folks.util.NotificationWorker;
 import com.jorgegiance.folks.viewmodels.HomeActivityViewModel;
 import com.jorgegiance.folks.viewmodels.ItemNewsViewModel;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener, HomeAdapter.HomeAdapterOnClickHandler {
 
@@ -74,22 +88,67 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         recycler.setHasFixedSize(true);
 
         setListeners();
+        initRecurrentNotification();
 
-        mProgressBar.setVisibility(View.VISIBLE);
-        observeLastPage();
+
 
     }
 
+    private void initRecurrentNotification() {
+
+//
+//        WorkManager mWorkManager = WorkManager.getInstance();
+        Constraints constraints = new Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build();
+//
+//        PeriodicWorkRequest notificationRequest =
+//                new PeriodicWorkRequest.Builder(NotificationWorker.class, 15, TimeUnit.MINUTES)
+//                        .setConstraints(constraints)
+//                        .build();
+//
+//
+//
+//        mWorkManager.enqueueUniquePeriodicWork(Constants.NEW_STORIES_NOTIFICATION_WORK_ID
+//                , ExistingPeriodicWorkPolicy.KEEP
+//                , notificationRequest);
+//
+
+
+
+
+        Calendar currentDate = Calendar.getInstance();
+        Calendar dueDate = Calendar.getInstance();
+        // Set Execution around 07:00:00 PM
+        dueDate.set(Calendar.HOUR_OF_DAY, 19);
+        dueDate.set(Calendar.MINUTE, 0);
+        dueDate.set(Calendar.SECOND, 0);
+        if (dueDate.before(currentDate)) {
+            dueDate.add(Calendar.HOUR_OF_DAY, 24);
+        }
+       long timeDiff = dueDate.getTimeInMillis() - currentDate.getTimeInMillis();
+        OneTimeWorkRequest notificationRequest = new OneTimeWorkRequest.Builder(NotificationWorker.class)
+                .setConstraints(constraints)
+                .setInitialDelay(timeDiff, TimeUnit.MILLISECONDS)
+                .build();
+
+
+
+     //   WorkManager.getInstance().enqueue(notificationRequest2);
+        WorkManager.getInstance().enqueueUniqueWork(Constants.NEW_STORIES_NOTIFICATION_WORK_ID
+                , ExistingWorkPolicy.KEEP
+                , notificationRequest);
+    }
 
 
     private void observeLastPage() {
-        mHomeActivityViewModel.setCurrentPage(Constants.initialCurrentPage);
+        mHomeActivityViewModel.setCurrentPage(Constants.INITIAL_CURRENT_PAGE);
         mItemNewsViewModel.getLastPage().observe(this, new Observer<Long>() {
             @Override
             public void onChanged( Long lastPage ) {
 
                 if (lastPage != null){
-                    if (mHomeActivityViewModel.getCurrentPage().getValue() == Constants.initialCurrentPage){
+                    if (mHomeActivityViewModel.getCurrentPage().getValue() == Constants.INITIAL_CURRENT_PAGE){
                         mHomeActivityViewModel.setCurrentPage(lastPage);
                         loadPage(lastPage);
                     }else{
@@ -212,5 +271,21 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         Intent detailIntent = new Intent(this, DetailHomeActivity.class);
         detailIntent.putExtra(getResources().getString(R.string.NEWS_KEY), news);
         startActivity(detailIntent);
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mItemNewsViewModel.detachLastPageListener();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        mProgressBar.setVisibility(View.VISIBLE);
+        observeLastPage();
     }
 }

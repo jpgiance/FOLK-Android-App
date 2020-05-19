@@ -19,7 +19,7 @@ public class FirebaseRepository {
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mLastPageReference;
-    DatabaseReference mPageReference;
+    private DatabaseReference mPageReference;
     private ChildEventListener mChildEventListener;
     private ValueEventListener mLastPageListener;
 
@@ -36,7 +36,7 @@ public class FirebaseRepository {
 
 
     public MutableLiveData<Long> updateLastPage(){
-        final MutableLiveData<Long> data = new MutableLiveData();
+        final MutableLiveData<Long> data = new MutableLiveData<>();
 
         mLastPageReference = mFirebaseDatabase.getReference().child("pages").child("last");
         mLastPageListener = new ValueEventListener() {
@@ -77,6 +77,13 @@ public class FirebaseRepository {
         });
 
         return data;
+    }
+
+    public void detachLastPageListener(){
+        if (mLastPageListener != null){
+            mLastPageReference.removeEventListener(mLastPageListener);
+            mLastPageListener = null;
+        }
     }
 
 }

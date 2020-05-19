@@ -33,4 +33,8 @@ public class ItemNewsViewModel extends AndroidViewModel {
     public LiveData<Page> getPage(long pageNumber ) {
         return mFirebaseRepository.updatePage(pageNumber);
     }
+
+    public void detachLastPageListener(){
+        mFirebaseRepository.detachLastPageListener();
+    }
 }

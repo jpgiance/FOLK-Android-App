@@ -15,7 +15,7 @@ public class HomeActivityViewModel extends AndroidViewModel {
     public HomeActivityViewModel( @NonNull Application application ) {
         super(application);
 
-        currentPage.setValue((Constants.initialCurrentPage));
+        currentPage.setValue((Constants.INITIAL_CURRENT_PAGE));
     }
 
     public MutableLiveData<Long> getCurrentPage() {

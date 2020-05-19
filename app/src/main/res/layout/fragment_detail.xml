@@ -46,7 +46,6 @@
         android:layout_height="250dp"
         android:scaleType="centerInside"
         android:background="@color/colorWhite"
-        android:src="@drawable/gina"
         android:contentDescription="@string/detail_poster_description" />
 
 
@@ -60,6 +59,7 @@
 
 
     <Button
+        android:id="@+id/vote_button"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="@string/vote_button"

@@ -85,6 +85,7 @@ public class ChartFragment extends Fragment {
         chart.setCenterTextOffset(0, -20);
 
         chart.setCenterText(generateCenterText());
+        chart.setCenterTextSize(16f);
 
         setData(4, 100);
 
@@ -96,12 +97,13 @@ public class ChartFragment extends Fragment {
         l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
         l.setDrawInside(false);
         l.setXEntrySpace(7f);
-        l.setYEntrySpace(0f);
+        l.setYEntrySpace(5f);
         l.setYOffset(0f);
+        l.setTextSize(16f);
 
         // entry label styling
-        chart.setEntryLabelColor(Color.WHITE);
-        chart.setEntryLabelTextSize(12f);
+        chart.setEntryLabelColor(Color.BLACK);
+        chart.setEntryLabelTextSize(16f);
     }
 
     private void configureChart1() {
@@ -130,6 +132,7 @@ public class ChartFragment extends Fragment {
         chart2.setCenterTextOffset(0, -20);
 
         chart2.setCenterText(generateCenterText());
+        chart2.setCenterTextSize(16f);
 
         setData(4, 100);
 
@@ -141,8 +144,9 @@ public class ChartFragment extends Fragment {
         l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
         l.setDrawInside(false);
         l.setXEntrySpace(7f);
-        l.setYEntrySpace(0f);
+        l.setYEntrySpace(5f);
         l.setYOffset(0f);
+        l.setTextSize(16f);
 
         // entry label styling
         chart2.setEntryLabelColor(Color.BLACK);
@@ -164,7 +168,7 @@ public class ChartFragment extends Fragment {
         values.add(new PieEntry(600, "Credible"));
 
 
-        PieDataSet dataSet = new PieDataSet(values, "Election Results");
+        PieDataSet dataSet = new PieDataSet(values, "");
         dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
 
@@ -172,8 +176,9 @@ public class ChartFragment extends Fragment {
         //dataSet.setSelectionShift(0f);
 
         PieData data = new PieData(dataSet);
-        data.setValueFormatter(new PercentFormatter());
-        data.setValueTextSize(11f);
+        data.setValueFormatter(new PercentFormatter(chart));
+
+        data.setValueTextSize(16f);
         data.setValueTextColor(Color.BLACK);
         chart.setData(data);
         chart2.setData(data);

@@ -33,7 +33,7 @@
     <string name="address">Address</string>
     <string name="state">State</string>
     <string name="coma_separator">,</string>
-    <string name="locality_title">Type locality:</string>
+    <string name="locality_title">Enter address:</string>
     <string name="search">Search</string>
 
 
@@ -53,7 +53,6 @@
     <string name="snackbar_title">New stories added</string>
     <string name="snackbar_action">VIEW</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="log_out">Log out</string>
     <string name="detail_poster_description">This is the article poster picture</string>
@@ -76,6 +75,9 @@
     <string name="zip_code_hint">zip code</string>
     <string name="president_picture_description">this is a picture of the president or the governor depending on the filter selected</string>
     <string name="vice_president_picture_description">this is a picture of the vice president or lieutenant governor depending on the filter selected</string>
+    <string name="main_notification_channel_name">New Stories</string>
+    <string name="new_stories_notification_title">FOLKS Stories</string>
+    <string name="new_stories_notification_body">Check out these new stories</string>
 
 
 </resources>
