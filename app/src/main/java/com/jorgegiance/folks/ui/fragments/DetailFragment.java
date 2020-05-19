@@ -126,8 +126,13 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick( View v ) {
-        if (v.getId() == R.id.vote_button){
-            NotificationUtil.setNewStoriesNotification(ctx);
+
+        switch (v.getId()){
+            case R.id.vote_button:
+                NotificationUtil.setNewStoriesNotification(ctx);
+                break;
+
         }
+
     }
 }
