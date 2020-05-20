@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -212,7 +213,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setIconColor() {
 
-        homeButton.setColorFilter(getResources().getColor(R.color.colorAccent));
+        homeButton.setColorFilter(ContextCompat.getColor(this, R.color.colorAccent));
     }
 
     private void setListeners() {

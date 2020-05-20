@@ -57,8 +57,8 @@ public class TopStoriesWidget extends AppWidgetProvider  {
 
 
 
-        //views.setTextViewText(R.id.article_body, page.getItems().get(articleIndex).getNews().get(0).getTitle());
-        views.setTextViewText(R.id.article_body, String.valueOf(articleIndex));
+        views.setTextViewText(R.id.article_body, page.getItems().get(articleIndex).getNews().get(0).getTitle());
+        //views.setTextViewText(R.id.article_body, String.valueOf(articleIndex));
 
         AppWidgetTarget appWidgetTarget = new AppWidgetTarget(context, R.id.article_poster, views, appWidgetId){
 

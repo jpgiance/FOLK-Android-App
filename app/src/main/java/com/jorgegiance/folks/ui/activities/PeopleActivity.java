@@ -2,6 +2,7 @@ package com.jorgegiance.folks.ui.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -74,7 +75,7 @@ public class PeopleActivity extends AppCompatActivity implements View.OnClickLis
 
     private void setIconColor() {
 
-        peopleButton.setColorFilter(getResources().getColor(R.color.colorAccent));
+        peopleButton.setColorFilter(ContextCompat.getColor(this, R.color.colorAccent));
     }
 
     private void setListeners() {

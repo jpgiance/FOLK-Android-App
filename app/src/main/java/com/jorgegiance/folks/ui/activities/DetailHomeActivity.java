@@ -1,15 +1,11 @@
 package com.jorgegiance.folks.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -20,10 +16,6 @@ import com.jorgegiance.folks.models.firebaseModels.News;
 import com.jorgegiance.folks.viewmodels.DetailActivityViewModel;
 import com.jorgegiance.folks.viewmodels.ItemNewsViewModel;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 public class DetailHomeActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -91,60 +83,20 @@ public class DetailHomeActivity extends AppCompatActivity implements View.OnClic
 
     private void share() {
 
-        // Get access to bitmap image from view
-        ImageView image = (ImageView) findViewById(R.id.news_poster);
-        // Get access to the URI for the bitmap
-        Uri bmpUri = getLocalBitmapUri(image);
-        if (bmpUri != null) {
-            // Construct a ShareIntent with link to image
-            Intent shareIntent = new Intent();
-            shareIntent.setAction(Intent.ACTION_SEND);
-            shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
-            shareIntent.setType("image/*");
-            // Launch sharing dialog for image
-            startActivity(Intent.createChooser(shareIntent, "Share Image"));
-        } else {
-            // ...sharing failed, handle error
-        }
+        String imageUrl = mDetailActivityViewModel.getSelectedNews().getPhotoUrl();
+        String title = mDetailActivityViewModel.getSelectedNews().getTitle();
 
-        String text = mDetailActivityViewModel.getSelectedNews().getTitle();
-        Uri imageUri = Uri.parse(mDetailActivityViewModel.getSelectedNews().getPhotoUrl());
-        Intent shareIntent = new Intent();
-        shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.putExtra(Intent.EXTRA_TEXT, text);
-        shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
-        shareIntent.setType("image/*");
-        shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        startActivity(Intent.createChooser(shareIntent, "Share images..."));
+
+
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("text/plain");
+        share.putExtra(Intent.EXTRA_TEXT, title);
+        startActivity(Intent.createChooser(share, "Share to"));
+
+
     }
 
-    // Returns the URI path to the Bitmap displayed in specified ImageView
-    public Uri getLocalBitmapUri(ImageView imageView) {
-        // Extract Bitmap from ImageView drawable
-        Drawable drawable = imageView.getDrawable();
-        Bitmap bmp = null;
-        if (drawable instanceof BitmapDrawable){
-            bmp = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-        } else {
-            return null;
-        }
-        // Store image to default external storage directory
-        Uri bmpUri = null;
-        try {
-            // Use methods on Context to access package-specific directories on external storage.
-            // This way, you don't need to request external read/write permission.
-            // See https://youtu.be/5xVh-7ywKpE?t=25m25s
-            File file =  new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image_" + System.currentTimeMillis() + ".png");
-            FileOutputStream out = new FileOutputStream(file);
-            bmp.compress(Bitmap.CompressFormat.PNG, 90, out);
-            out.close();
-            // **Warning:** This will fail for API >= 24, use a FileProvider as shown below instead.
-            bmpUri = Uri.fromFile(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return bmpUri;
-    }
+
 
     private void setListeners() {
 
@@ -172,6 +124,7 @@ public class DetailHomeActivity extends AppCompatActivity implements View.OnClic
 
     private void setIconColor() {
 
-        homeButton.setColorFilter(getResources().getColor(R.color.colorAccent));
+
+        homeButton.setColorFilter(ContextCompat.getColor(this, R.color.colorAccent));
     }
 }

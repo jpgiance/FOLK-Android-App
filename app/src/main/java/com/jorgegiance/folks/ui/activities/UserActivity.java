@@ -10,6 +10,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -89,15 +90,13 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onTabSelected( TabLayout.Tab tab ) {
-                tab.getIcon().setTint(getResources().getColor(R.color.colorAccent));
-              //  tab.getIcon().setColorFilter(new BlendModeColorFilter(getResources().getColor(R.color.colorAccent), BlendMode.SRC_ATOP));
+                tab.getIcon().setTint(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent));
             }
 
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onTabUnselected( TabLayout.Tab tab ) {
-                tab.getIcon().setTint(getResources().getColor(R.color.colorWhite));
-             //   tab.getIcon().setColorFilter(new BlendModeColorFilter(getResources().getColor(R.color.colorWhite), BlendMode.SRC_ATOP));
+                tab.getIcon().setTint(ContextCompat.getColor(getApplicationContext(), R.color.colorWhite));
 
             }
 
@@ -145,6 +144,6 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setIconColor() {
 
-        userButton.setColorFilter(getResources().getColor(R.color.colorAccent));
+        userButton.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent));
     }
 }
