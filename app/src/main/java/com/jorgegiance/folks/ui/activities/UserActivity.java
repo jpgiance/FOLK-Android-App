@@ -1,19 +1,21 @@
 package com.jorgegiance.folks.ui.activities;
 
 import android.content.Intent;
-import android.graphics.BlendMode;
-import android.graphics.BlendModeColorFilter;
+import android.os.Build;
 import android.os.Bundle;
 
+import com.firebase.ui.auth.AuthUI;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.viewpager2.widget.ViewPager2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.jorgegiance.folks.R;
@@ -27,6 +29,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
     AppBarLayout appBarLayout;
     ViewPager2 viewPager;
     TabLayout tabs;
+    TextView logOut;
     ImageView userButton, homeButton, peopleButton;
 
     @Override
@@ -40,6 +43,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         userButton = findViewById(R.id.icon_user);
         homeButton = findViewById(R.id.icon_home);
         peopleButton = findViewById(R.id.icon_peopleGroup);
+        logOut = findViewById(R.id.log_out);
 
 
         UserPagerAdapter userPagerAdapter = new UserPagerAdapter(this, this);
@@ -48,23 +52,21 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(
                 tabs, viewPager, new TabLayoutMediator.TabConfigurationStrategy(){
 
+
             @Override
             public void onConfigureTab( @NonNull TabLayout.Tab tab, int position ) {
                 switch (position){
                     case 0:
                         tab.setText(R.string.tab_profile);
                         tab.setIcon(R.drawable.ic_person_profile);
-                        tab.getIcon().setColorFilter(new BlendModeColorFilter(getResources().getColor(R.color.colorAccent), BlendMode.SRC_ATOP));
                         break;
                     case 1:
                         tab.setText(R.string.tab_following);
                         tab.setIcon(R.drawable.ic_star_following);
-                    //    tab.getIcon().setColorFilter(new BlendModeColorFilter(getResources().getColor(R.color.colorAccent), BlendMode.SRC_ATOP));
                         break;
                     case 2:
                         tab.setText(R.string.tab_settings);
                         tab.setIcon(R.drawable.ic_settings_user);
-                    //    tab.getIcon().setColorFilter(new BlendModeColorFilter(getResources().getColor(R.color.colorAccent), BlendMode.SRC_ATOP));
                         break;
                 }
             }
@@ -81,16 +83,21 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         userButton.setOnClickListener(this);
         homeButton.setOnClickListener(this);
         peopleButton.setOnClickListener(this);
+        logOut.setOnClickListener(this);
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onTabSelected( TabLayout.Tab tab ) {
-                tab.getIcon().setColorFilter(new BlendModeColorFilter(getResources().getColor(R.color.colorAccent), BlendMode.SRC_ATOP));
+                tab.getIcon().setTint(getResources().getColor(R.color.colorAccent));
+              //  tab.getIcon().setColorFilter(new BlendModeColorFilter(getResources().getColor(R.color.colorAccent), BlendMode.SRC_ATOP));
             }
 
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onTabUnselected( TabLayout.Tab tab ) {
-                tab.getIcon().setColorFilter(new BlendModeColorFilter(getResources().getColor(R.color.colorWhite), BlendMode.SRC_ATOP));
+                tab.getIcon().setTint(getResources().getColor(R.color.colorWhite));
+             //   tab.getIcon().setColorFilter(new BlendModeColorFilter(getResources().getColor(R.color.colorWhite), BlendMode.SRC_ATOP));
 
             }
 
@@ -115,6 +122,11 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.icon_peopleGroup:
                 transitionToPeopleScreen();
                 break;
+            case R.id.log_out:
+                AuthUI.getInstance().signOut(this);
+                finish();
+                break;
+
         }
     }
 

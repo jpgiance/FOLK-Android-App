@@ -3,6 +3,7 @@ package com.jorgegiance.folks.ui.widget;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -49,15 +50,15 @@ public class TopStoriesWidget extends AppWidgetProvider  {
         views.setOnClickPendingIntent(R.id.article_container, pendingIntent);
 
         views.setOnClickPendingIntent(R.id.next_article_button,
-                getPendingSelfIntent(context, Constants.NEXT_ARTICLE_ACTION_ID, appWidgetId));
+                getPendingSelfIntent(context, Constants.NEXT_ARTICLE_ACTION_ID));
 
         views.setOnClickPendingIntent(R.id.previous_article_button,
-                getPendingSelfIntent(context, Constants.PREVIOUS_ARTICLE_ACTION_ID, appWidgetId));
+                getPendingSelfIntent(context, Constants.PREVIOUS_ARTICLE_ACTION_ID));
 
 
 
-        views.setTextViewText(R.id.article_body, page.getItems().get(articleIndex).getNews().get(0).getTitle());
-
+        //views.setTextViewText(R.id.article_body, page.getItems().get(articleIndex).getNews().get(0).getTitle());
+        views.setTextViewText(R.id.article_body, String.valueOf(articleIndex));
 
         AppWidgetTarget appWidgetTarget = new AppWidgetTarget(context, R.id.article_poster, views, appWidgetId){
 
@@ -109,9 +110,8 @@ public class TopStoriesWidget extends AppWidgetProvider  {
         // Enter relevant functionality for when the last widget is disabled
     }
 
-    protected static PendingIntent getPendingSelfIntent( Context context, String action, int appWidgetId ) {
+    protected static PendingIntent getPendingSelfIntent( Context context, String action ) {
         Intent intent = new Intent(context, TopStoriesWidget.class);
-        intent.putExtra(Constants.WIDGET_ID_INTENT_KEY, appWidgetId);
         intent.setAction(action);
         return PendingIntent.getBroadcast(context, 0, intent, 0);
     }
@@ -120,6 +120,9 @@ public class TopStoriesWidget extends AppWidgetProvider  {
     public void onReceive( Context context, Intent intent ) {
         super.onReceive(context, intent);
 
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, TopStoriesWidget.class));
+
         if (Constants.NEXT_ARTICLE_ACTION_ID.equals(intent.getAction())){
 
             if (mPage != null ){
@@ -127,17 +130,26 @@ public class TopStoriesWidget extends AppWidgetProvider  {
                 if (mPage.getItems().size() > index){
                     if (mPage.getItems().get(index).getNews() != null){
                         articleIndex = index;
+
+                        for (int appWidgetId : appWidgetIds) {
+                            TopStoriesWidget.updateAppWidget(context, appWidgetManager, appWidgetId, mPage);
+                        }
                     }
                 }
-                updateAppWidget(context, AppWidgetManager.getInstance(context), intent.getIntExtra(Constants.WIDGET_ID_INTENT_KEY, 1), mPage);
+
+
             }
         }else if (Constants.PREVIOUS_ARTICLE_ACTION_ID.equals(intent.getAction())){
             if (mPage != null && articleIndex > 0){
                 int index = articleIndex - 1;
                 if (mPage.getItems().get(index).getNews() != null){
                     articleIndex = index;
+
+                    for (int appWidgetId : appWidgetIds) {
+                        TopStoriesWidget.updateAppWidget(context, appWidgetManager, appWidgetId, mPage);
+                    }
                 }
-                updateAppWidget(context, AppWidgetManager.getInstance(context), intent.getIntExtra(Constants.WIDGET_ID_INTENT_KEY, 1), mPage);
+
             }
         }
     }

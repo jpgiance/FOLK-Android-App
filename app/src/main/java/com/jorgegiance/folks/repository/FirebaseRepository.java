@@ -39,22 +39,26 @@ public class FirebaseRepository {
         final MutableLiveData<Long> data = new MutableLiveData<>();
 
         mLastPageReference = mFirebaseDatabase.getReference().child("pages").child("last");
-        mLastPageListener = new ValueEventListener() {
+        if (mLastPageListener == null){
+            mLastPageListener = new ValueEventListener() {
 
-            @Override
-            public void onDataChange( @NonNull DataSnapshot dataSnapshot ) {
-                data.setValue((Long) dataSnapshot.getValue());
+                @Override
+                public void onDataChange( @NonNull DataSnapshot dataSnapshot ) {
+                    data.setValue((Long) dataSnapshot.getValue());
 
-            }
+                }
 
-            @Override
-            public void onCancelled( @NonNull DatabaseError databaseError ) {
+                @Override
+                public void onCancelled( @NonNull DatabaseError databaseError ) {
 
-            }
+                }
 
 
-        };
-        mLastPageReference.addValueEventListener(mLastPageListener);
+            };
+            mLastPageReference.addValueEventListener(mLastPageListener);
+        }
+
+
 
         return data;
     }

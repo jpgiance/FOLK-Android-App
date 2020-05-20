@@ -15,6 +15,7 @@
         style="@style/FolksThemeDark">
 
         <TextView
+            android:id="@+id/log_out"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -57,7 +58,9 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/FolksThemeDark"/>
+            android:background="?attr/colorPrimary"
+            app:tabSelectedTextColor="@color/colorAccent"
+            app:tabIndicatorColor="@color/colorAccent"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 

@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
@@ -16,13 +15,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.jorgegiance.folks.R;
 import com.jorgegiance.folks.adapters.DetailPagerAdapter;
-import com.jorgegiance.folks.util.NotificationUtil;
 import com.jorgegiance.folks.util.Utilities;
 import com.jorgegiance.folks.viewmodels.DetailActivityViewModel;
 
@@ -129,7 +128,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
 
         switch (v.getId()){
             case R.id.vote_button:
-                NotificationUtil.setNewStoriesNotification(ctx);
+                Toast.makeText(ctx, "Available soon", Toast.LENGTH_SHORT).show();
                 break;
 
         }

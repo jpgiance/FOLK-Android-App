@@ -1,5 +1,7 @@
 package com.jorgegiance.folks.ui.activities;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.lifecycle.Observer;
@@ -7,25 +9,24 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.work.Constraints;
-import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.ExistingWorkPolicy;
 import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
-import androidx.work.PeriodicWorkRequest;
-import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
-import androidx.work.Worker;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Network;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.jorgegiance.folks.R;
 import com.jorgegiance.folks.adapters.HomeAdapter;
 import com.jorgegiance.folks.models.firebaseModels.Item;
@@ -37,10 +38,15 @@ import com.jorgegiance.folks.viewmodels.HomeActivityViewModel;
 import com.jorgegiance.folks.viewmodels.ItemNewsViewModel;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener, HomeAdapter.HomeAdapterOnClickHandler {
+
+    public static final int RC_SIGN_IN = 1;
+    private static final String TAG = "TAG";
 
     // UI components
     private ProgressBar mProgressBar;
@@ -54,19 +60,19 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private ItemNewsViewModel mItemNewsViewModel;
     private HomeActivityViewModel mHomeActivityViewModel;
 
-//    private FirebaseAuth mFirebaseAuth;
-//    private FirebaseAuth.AuthStateListener mAuthStateListener;
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseAuth.AuthStateListener mAuthStateListener;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        mItemNewsViewModel = new ViewModelProvider(this).get(ItemNewsViewModel.class);
+
         mHomeActivityViewModel = new ViewModelProvider(this).get(HomeActivityViewModel.class);
 
 
-//        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseAuth = FirebaseAuth.getInstance();
 
         userButton = findViewById(R.id.icon_user);
         homeButton = findViewById(R.id.icon_home);
@@ -88,7 +94,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         recycler.setHasFixedSize(true);
 
         setListeners();
-        initRecurrentNotification();
+
 
 
 
@@ -140,20 +146,21 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 , notificationRequest);
     }
 
-
     private void observeLastPage() {
+        mItemNewsViewModel = new ViewModelProvider(this).get(ItemNewsViewModel.class);
+        Log.d(TAG, "observeLastPage: check");
         mHomeActivityViewModel.setCurrentPage(Constants.INITIAL_CURRENT_PAGE);
         mItemNewsViewModel.getLastPage().observe(this, new Observer<Long>() {
             @Override
             public void onChanged( Long lastPage ) {
-
+                Log.d(TAG, "onChanged: check");
                 if (lastPage != null){
                     if (mHomeActivityViewModel.getCurrentPage().getValue() == Constants.INITIAL_CURRENT_PAGE){
                         mHomeActivityViewModel.setCurrentPage(lastPage);
                         loadPage(lastPage);
                     }else{
                         // Show notification "New stories"
-
+                        Log.d(TAG, "onChanged: ERRRRRRRRRORRRRRRR");
                         showSnackbarNewStories(lastPage);
                     }
 
@@ -188,6 +195,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         mItemNewsViewModel.getPage(pageNumber).observe(this, new Observer<Page>() {
             @Override
             public void onChanged( Page page ) {
+                Log.d(TAG, "onChanged: check");
                 if (page != null){
                     if (mHomeActivityViewModel.getCurrentPage().getValue() == pageNumber){
                         adapter.setHomeItemsList((ArrayList<Item>) page.getItems());
@@ -201,7 +209,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
-
 
     private void setIconColor() {
 
@@ -226,7 +233,48 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
 
+            @Override
+            public void onAuthStateChanged( @NonNull FirebaseAuth firebaseAuth ) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null){
+                    // user is signed in
+                    Log.d(TAG, "onAuthStateChanged: signed in");
+                    onSignedInInitialize(user.getDisplayName());
+                }else{
+                    // user is signed out
+                    Log.d(TAG, "onAuthStateChanged: signed out");
+                    onSignedOutCleanup();
+                    startActivityForResult(
+                            AuthUI.getInstance()
+                                    .createSignInIntentBuilder()
+                                    .setIsSmartLockEnabled(false)
+                                    .setAvailableProviders(Arrays.asList(
+                                            new AuthUI.IdpConfig.GoogleBuilder().build(),
+                                            new AuthUI.IdpConfig.EmailBuilder().build(),
+                                            new AuthUI.IdpConfig.AnonymousBuilder().build()))
+                                    .build(),
+                            RC_SIGN_IN);
+                }
+            }
+        };
+
+
+
+    }
+
+    private void onSignedOutCleanup() {
+        Log.d(TAG, "onSignedOutCleanup: check");
+        WorkManager.getInstance().cancelAllWork();
+    }
+
+    private void onSignedInInitialize( String displayName ) {
+        Log.d(TAG, "onSignedInInitialize: check");
+        mProgressBar.setVisibility(View.VISIBLE);
+        observeLastPage();
+        initRecurrentNotification();
+        Log.d(TAG, "onSignedInInitialize: check after");
 
     }
 
@@ -249,7 +297,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void transitionToTopScreen() {
-        recycler.getLayoutManager().scrollToPosition(0);
+        Objects.requireNonNull(recycler.getLayoutManager()).scrollToPosition(0);
     }
 
     private void transitionToHomeScreen() {
@@ -277,15 +325,23 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onPause() {
         super.onPause();
-        mItemNewsViewModel.detachLastPageListener();
+        if (mAuthStateListener != null) {
+            mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
+        }
+
+        Log.d(TAG, "onPause: Check");
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        mFirebaseAuth.addAuthStateListener(mAuthStateListener);
+        Log.d(TAG, "onResume: Check");
 
-        mProgressBar.setVisibility(View.VISIBLE);
-        observeLastPage();
+
     }
+
+
+
 }
