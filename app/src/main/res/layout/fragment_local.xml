@@ -80,7 +80,7 @@
             android:layout_marginStart="20dp"
             android:textColor="@color/colorWhite"
             android:text="@string/search"
-            android:background="@color/colorAccent"/>
+            android:backgroundTint="@color/colorAccent"/>
 
 
 

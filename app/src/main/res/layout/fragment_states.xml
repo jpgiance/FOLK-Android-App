@@ -18,7 +18,7 @@
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textColor="@android:color/white"
-        android:background="@color/colorAccent"
+        android:backgroundTint="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

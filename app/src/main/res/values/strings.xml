@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FOLKS</string>
+    <string name="app_name">Folks</string>
 
     <string name="tab_state">States</string>
     <string name="tab_congress">Congress</string>
@@ -84,6 +84,7 @@
     <string name="widget_previous_button_description">Previous article button</string>
     <string name="widget_next_button_description">Previous article button</string>
     <string name="widget_title">Check out these new stories</string>
+    <string name="Button_rate_this_article">Rate this article</string>
 
 
 </resources>

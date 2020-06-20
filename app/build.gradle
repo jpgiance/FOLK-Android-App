@@ -19,12 +19,26 @@ android {
 
     buildTypes {
         debug {
+            signingConfig signingConfigs.debug
             buildConfigField('String', "PROPUBLICA_API_KEY", PROPUBLICA_API_KEY)
             buildConfigField('String', "GOOGLE_API_KEY", GOOGLE_API_KEY)
         }
         release {
+            signingConfig signingConfigs.debug
+            buildConfigField('String', "PROPUBLICA_API_KEY", PROPUBLICA_API_KEY)
+            buildConfigField('String', "GOOGLE_API_KEY", GOOGLE_API_KEY)
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    signingConfigs {
+        release {
+
+            keyAlias 'my_key'
+            keyPassword 'Folks+532'
+            storeFile file('../keystore.jks')
+            storePassword 'Folks+235'
         }
     }
 

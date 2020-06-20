@@ -32,6 +32,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:windowBackground">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
 <!--        <item name="tabIndicatorColor">@color/colorAccent</item>-->
 <!--        <item name="tabIconTint">@color/colorWhite</item>-->
 <!--        <item name="tabSelectedTextColor">@color/colorAccent</item>-->
