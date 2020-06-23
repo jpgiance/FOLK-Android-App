@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.work.Constraints;
 import androidx.work.ExistingWorkPolicy;
@@ -298,7 +299,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void transitionToTopScreen() {
-        Objects.requireNonNull(recycler.getLayoutManager()).scrollToPosition(0);
+        RecyclerView.SmoothScroller smoothScroller = new LinearSmoothScroller(this) {
+            @Override protected int getVerticalSnapPreference() {
+                return LinearSmoothScroller.SNAP_TO_START;
+            }
+        };
+
+        smoothScroller.setTargetPosition(0);
+        Objects.requireNonNull(recycler.getLayoutManager()).startSmoothScroll(smoothScroller);
     }
 
     private void transitionToHomeScreen() {

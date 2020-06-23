@@ -17,8 +17,7 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@color/colorPrimaryDark"
-            app:layout_scrollFlags="scroll|enterAlways|snap">
+            android:background="@color/colorPrimaryDark">
 
             <ImageView
                 android:id="@+id/icon_logo"

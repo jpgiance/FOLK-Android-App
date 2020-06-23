@@ -54,12 +54,14 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
                 tabs, viewPager, new TabLayoutMediator.TabConfigurationStrategy(){
 
 
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onConfigureTab( @NonNull TabLayout.Tab tab, int position ) {
                 switch (position){
                     case 0:
                         tab.setText(R.string.tab_profile);
                         tab.setIcon(R.drawable.ic_person_profile);
+                        tab.getIcon().setTint(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent));
                         break;
                     case 1:
                         tab.setText(R.string.tab_following);
