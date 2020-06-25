@@ -59,7 +59,7 @@ public class CongressFragment extends Fragment implements View.OnClickListener{
         RecyclerView recyclerSenate = rootView.findViewById(R.id.person_recycler_0);
         adapterSenate = new MembersAdapter(getContext());
         recyclerSenate.setAdapter(adapterSenate);
-        recyclerSenate.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerSenate.setLayoutManager(new LinearLayoutManager(ctx, LinearLayoutManager.HORIZONTAL, false));
         recyclerSenate.setHasFixedSize(true);
 
         RecyclerView recyclerCongress = rootView.findViewById(R.id.person_recycler_1);

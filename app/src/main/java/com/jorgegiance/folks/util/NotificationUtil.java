@@ -43,7 +43,7 @@ public class NotificationUtil {
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context,Constants.NEW_STORIES_NOTIFICATION_CHANNEL_ID)
                 .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
-                .setSmallIcon(R.drawable.ic_user_folks)
+                .setSmallIcon(R.mipmap.ic_launcher_widget)
                 .setLargeIcon(largeIcon(context))
                 .setContentTitle(context.getString(R.string.new_stories_notification_title))
                 .setContentText(context.getString(R.string.new_stories_notification_body))

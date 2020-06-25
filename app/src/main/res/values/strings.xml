@@ -21,6 +21,7 @@
     <string name="profile_location_country">Country:</string>
     <string name="profile_location">Location</string>
     <string name="profile_location_city">City:</string>
+    <string name="profile_location_address">Address:</string>
     <string name="profile_location_state">State:</string>
     <string name="profile_location_zip_code">ZIP code:</string>
     <string name="profile_title">Personal Information</string>
@@ -68,7 +69,7 @@
     <string name="user_picture_description">user picture</string>
     <string name="name_hint">name</string>
     <string name="email_hint">email</string>
-    <string name="date_of_birth_hint">date of birth</string>
+    <string name="date_of_birth_hint">year of birth</string>
     <string name="city_hint">city</string>
     <string name="state_hint">state</string>
     <string name="country_hint">country</string>

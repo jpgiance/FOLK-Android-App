@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,6 +31,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static int TYPE_SINGLE = 3;
     private static int TYPE_DUO = 4;
     private static int TYPE_LIST = 5;
+    private static int TYPE_LOADING = 6;
 
     public HomeAdapter( Context ctx, HomeAdapterOnClickHandler handler ) {
         this.ctx = ctx;
@@ -44,6 +46,11 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public void addToHomeItemList(ArrayList<Item> homeItemsList ){
         this.homeItemsList.addAll(homeItemsList);
+        notifyDataSetChanged();
+    }
+
+    public void addItemToHomeItemList(Item item ){
+        this.homeItemsList.add(item);
         notifyDataSetChanged();
     }
 
@@ -64,23 +71,23 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
         if (viewType == TYPE_INFO) {
-                view = inflater.inflate(R.layout.info_home_item, parent, false);
+                view = inflater.inflate(R.layout.item_info_home, parent, false);
                 return new InfoHolder(view);
             }
         if (viewType == TYPE_TOP) {
-            view = inflater.inflate(R.layout.top_home_item, parent, false);
+            view = inflater.inflate(R.layout.item_top_home, parent, false);
             return new TopHolder(view);
         }
         if (viewType == TYPE_SINGLE) {
-            view = inflater.inflate(R.layout.single_home_item, parent, false);
+            view = inflater.inflate(R.layout.item_single_home, parent, false);
             return new SingleHolder(view);
         }
         if (viewType == TYPE_DUO) {
-            view = inflater.inflate(R.layout.duo_home_item, parent, false);
+            view = inflater.inflate(R.layout.item_duo_home, parent, false);
             return new DuoHolder(view);
         }
         if (viewType == TYPE_LIST) {
-            view = inflater.inflate(R.layout.list_home_item, parent, false);
+            view = inflater.inflate(R.layout.item_list_home, parent, false);
             return new ListHolder(view);
         }
         else
@@ -92,7 +99,9 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public int getItemViewType( int position ) {
 
-        if (homeItemsList.get(position).hasInformation())
+        if (homeItemsList.get(position) == null)
+            return TYPE_LOADING;
+        else if (homeItemsList.get(position).hasInformation())
             return TYPE_INFO;
         else if (homeItemsList.get(position).hasSectionTitle())
             return TYPE_TOP;
@@ -125,10 +134,16 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (getItemViewType(position) == TYPE_LIST){
             ((ListHolder) holder).populateView(homeItemsList.get(position));
         }
-
-        if (position == homeItemsList.size()-1){
-            mOnBottomReachedListener.onBottomReached(position);
+        if (getItemViewType(position) == TYPE_LOADING){
+            ((LoadingHolder) holder).populateView(homeItemsList.get(position));
         }
+
+//        if (position == homeItemsList.size()-1){
+//            mOnBottomReachedListener.onBottomReached(position);
+//
+//
+//        }
+
     }
 
     @Override
@@ -313,6 +328,20 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         public ListHolder( @NonNull View itemView ) {
             super(itemView);
+        }
+
+        public void populateView( Item homeItem ) {
+        }
+    }
+
+    public class LoadingHolder extends RecyclerView.ViewHolder {
+
+        ProgressBar progressBar;
+
+
+        public LoadingHolder( @NonNull View itemView ) {
+            super(itemView);
+            progressBar = itemView.findViewById(R.id.progressBar);
         }
 
         public void populateView( Item homeItem ) {

@@ -49,6 +49,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     public static final int RC_SIGN_IN = 1;
     private static final String TAG = "TAG";
+    private boolean isLoading = false;
 
     // UI components
     private ProgressBar mProgressBar;
@@ -207,6 +208,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     }
 
                     mProgressBar.setVisibility(View.GONE);
+                    isLoading = false;
                 }
             }
         });
@@ -227,11 +229,41 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         adapter.addOnBottomReachedListener(new HomeAdapter.OnBottomReachedListener() {
             @Override
             public void onBottomReached( int position ) {
+
                if ( mHomeActivityViewModel.getCurrentPage() != null) {
                    if (mHomeActivityViewModel.getCurrentPage().getValue() > 0) {
                        loadPage(mHomeActivityViewModel.getCurrentPage().getValue() - 1);
                    }
                }
+            }
+        });
+
+        recycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged( @NonNull RecyclerView recyclerView, int newState ) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled( @NonNull RecyclerView recyclerView, int dx, int dy ) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                if (!isLoading) {
+                    if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == adapter.getItemCount() - 1) {
+                        //bottom of list!
+                        loadMore();
+                        isLoading = true;
+                    }
+                }
+            }
+
+            private void loadMore() {
+                if ( mHomeActivityViewModel.getCurrentPage() != null) {
+                    if (mHomeActivityViewModel.getCurrentPage().getValue() > 0) {
+                        loadPage(mHomeActivityViewModel.getCurrentPage().getValue() - 1);
+                    }
+                }
             }
         });
 

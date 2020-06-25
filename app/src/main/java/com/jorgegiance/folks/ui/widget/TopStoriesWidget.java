@@ -41,7 +41,7 @@ public class TopStoriesWidget extends AppWidgetProvider  {
 
         mPage = page;
         // Construct the RemoteViews object
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.top_stories_widget);
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_top_stories);
 
         // Create an Intent to launch the HomeActivity when clicked
         Intent intent = new Intent(context, HomeActivity.class);

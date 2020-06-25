@@ -45,7 +45,7 @@ public class StateFilterDialog extends DialogFragment implements FilterAdapter.F
 
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
-        View mDialog = inflater.inflate(R.layout.dialog_filter_item, null);
+        View mDialog = inflater.inflate(R.layout.item_dialog_filter, null);
 
         builder.setView(mDialog)
                 .setTitle(R.string.filter_dialog_title)

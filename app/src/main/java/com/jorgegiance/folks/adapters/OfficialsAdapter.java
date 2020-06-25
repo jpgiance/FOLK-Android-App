@@ -27,7 +27,7 @@ public class OfficialsAdapter extends RecyclerView.Adapter<OfficialsAdapter.Offi
     @Override
     public OfficialsAdapter.OfficialsHolder onCreateViewHolder( @NonNull ViewGroup parent, int viewType ) {
         LayoutInflater inflater = LayoutInflater.from(ctx);
-        View peopleView = inflater.inflate(R.layout.people_item, parent, false);
+        View peopleView = inflater.inflate(R.layout.item_people, parent, false);
         OfficialsHolder holder = new OfficialsHolder(peopleView);
         return holder;
     }

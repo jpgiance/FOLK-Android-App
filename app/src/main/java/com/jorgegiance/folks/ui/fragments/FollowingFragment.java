@@ -1,66 +1,115 @@
 package com.jorgegiance.folks.ui.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.jorgegiance.folks.R;
+import com.jorgegiance.folks.adapters.FollowingAdapter;
+import com.jorgegiance.folks.models.googlecivicModels.Official;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FollowingFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FollowingFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private Context ctx;
 
     public FollowingFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment followingFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FollowingFragment newInstance( String param1, String param2 ) {
-        FollowingFragment fragment = new FollowingFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 
     @Override
     public void onCreate( Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView( LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState ) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_following, container, false);
+
+        final View rootView = inflater.inflate(R.layout.fragment_following, container, false);
+
+        RecyclerView recycler = rootView.findViewById(R.id.following_recycler);
+        FollowingAdapter adapter = new FollowingAdapter(ctx);
+        recycler.setAdapter(adapter);
+        recycler.setLayoutManager(new LinearLayoutManager(ctx, LinearLayoutManager.VERTICAL, false));
+        recycler.setHasFixedSize(true);
+
+        adapter.setMemberArrayList(getDummyList());
+
+        return rootView;
+    }
+
+    @Override
+    public void onAttach( @NonNull Context context ) {
+        super.onAttach(context);
+        ctx = context;
+    }
+
+    private ArrayList<Official> getDummyList(){
+
+        ArrayList<Official> list = new ArrayList<>();
+
+        ArrayList<String> office = new ArrayList<>();
+
+        office.add("President of the United States");
+
+        Official trump = new Official();
+        trump.setName("Donald Trump");
+        trump.setParty("Rep");
+        trump.setPhotoUrl("https://www.whitehouse.gov/wp-content/uploads/2017/11/President-Trump-Official-Portrait.jpg");
+        trump.setUrls(office);
+
+        list.add(trump);
+
+        office = new ArrayList<>();
+        office.add("Governor of Texas");
+        Official greg = new Official();
+        greg.setName("Greg Abbott");
+        greg.setParty("Rep");
+        greg.setPhotoUrl("https://gov.texas.gov/uploads/images/general/2015-GovernorAbbott-Portrait.jpg");
+        greg.setUrls(office);
+
+
+        list.add(greg);
+
+        office = new ArrayList<>();
+        office.add("In development");
+        Official election = new Official();
+        election.setName("2020 United States Senate Elections");
+        election.setParty("election");
+        election.setPhotoUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Flag_of_the_United_States_Senate.svg/1920px-Flag_of_the_United_States_Senate.svg.png");
+        election.setUrls(office);
+
+
+        list.add(election);
+
+
+        office = new ArrayList<>();
+        office.add("In development");
+        Official news = new Official();
+        news.setName("Coronavirus Relief Package");
+        news.setParty("news");
+        news.setPhotoUrl("https://www.gannett-cdn.com/presto/2020/03/19/USAT/ad55c5db-8200-4a39-b278-2033ad15085d-XXX__tax-refund.jpg");
+        news.setUrls(office);
+
+
+        list.add(news);
+
+
+        return list;
     }
 }

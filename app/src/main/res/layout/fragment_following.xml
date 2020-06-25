@@ -7,15 +7,21 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.FollowingFragment">
 
-
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/following_recycler"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/following_title"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+        android:layout_marginTop="20dp"
+        android:background="?attr/colorPrimary"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        app:layout_constraintTop_toBottomOf="@+id/following_recycler"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -79,7 +79,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
             android:textAllCaps="false"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorDarkGrey"
             android:text="@string/search"
             android:backgroundTint="@color/colorAccent"/>
 

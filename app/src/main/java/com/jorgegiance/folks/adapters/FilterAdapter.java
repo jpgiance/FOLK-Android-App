@@ -31,7 +31,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.StatesList
     public FilterAdapter.StatesListHolder onCreateViewHolder( @NonNull ViewGroup parent, int viewType ) {
 
         LayoutInflater inflater = LayoutInflater.from(ctx);
-        View settingView = inflater.inflate(R.layout.recycler_filter_item, parent, false);
+        View settingView = inflater.inflate(R.layout.item_recycler_filter, parent, false);
 
         return new StatesListHolder(settingView);
     }
