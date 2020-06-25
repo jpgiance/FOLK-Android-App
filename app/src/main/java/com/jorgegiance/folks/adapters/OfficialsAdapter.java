@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.jorgegiance.folks.R;
 import com.jorgegiance.folks.models.googlecivicModels.StateCabinet;
+import com.jorgegiance.folks.util.Utilities;
 
 public class OfficialsAdapter extends RecyclerView.Adapter<OfficialsAdapter.OfficialsHolder> {
 
@@ -52,8 +53,17 @@ public class OfficialsAdapter extends RecyclerView.Adapter<OfficialsAdapter.Offi
 
             holder.personName.setText(stateCabinet.getOfficials().get(position).getName());
 
+
+        String photo = "";
+        if (stateCabinet.getOfficials().get(position).getPhotoUrl() == null){
+            photo = Utilities.photoUrl(stateCabinet.getOfficials().get(position).getName());
+        }else {
+            photo = stateCabinet.getOfficials().get(position).getPhotoUrl();
+        }
+
+
             Glide.with(ctx)
-                    .load(stateCabinet.getOfficials().get(position).getPhotoUrl())
+                    .load(photo)
                     .centerCrop()
                     .placeholder(R.drawable.ic_person)
                     .into(holder.personImage);

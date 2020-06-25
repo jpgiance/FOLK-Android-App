@@ -22,10 +22,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.jorgegiance.folks.R;
 import com.jorgegiance.folks.adapters.OfficialsAdapter;
+import com.jorgegiance.folks.models.googlecivicModels.Office;
+import com.jorgegiance.folks.models.googlecivicModels.Official;
 import com.jorgegiance.folks.models.googlecivicModels.StateCabinet;
 import com.jorgegiance.folks.ui.dialogs.StateFilterDialog;
+import com.jorgegiance.folks.util.Utilities;
 import com.jorgegiance.folks.viewmodels.StatesViewModel;
 import com.jorgegiance.folks.viewmodels.PeopleActivityViewModel;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 public class StatesFragment extends Fragment implements View.OnClickListener{
 
@@ -136,8 +142,15 @@ public class StatesFragment extends Fragment implements View.OnClickListener{
 
                     presidentName.setText(stateCabinet.getOfficials().get(0).getName());
                     presidentTitle.setText(stateCabinet.getOffices().get(0).getName());
+
+                    String photo = "";
+                    if (stateCabinet.getOfficials().get(0).getPhotoUrl() == null){
+                        photo = Utilities.photoUrl(stateCabinet.getOfficials().get(0).getName());
+                    }else {
+                        photo = stateCabinet.getOfficials().get(0).getPhotoUrl();
+                    }
                     Glide.with(ctx)
-                            .load(stateCabinet.getOfficials().get(0).getPhotoUrl())
+                            .load(photo)
                             .centerCrop()
                             .placeholder(R.drawable.ic_person)
                             .into(presidentImage
@@ -159,8 +172,14 @@ public class StatesFragment extends Fragment implements View.OnClickListener{
 
                     vicePresidentName.setText(stateCabinet.getOfficials().get(0).getName());
                     vicePresidentTitle.setText(stateCabinet.getOffices().get(0).getName());
+                    String photo = "";
+                    if (stateCabinet.getOfficials().get(0).getPhotoUrl() == null){
+                        photo = Utilities.photoUrl(stateCabinet.getOfficials().get(0).getName());
+                    }else {
+                        photo = stateCabinet.getOfficials().get(0).getPhotoUrl();
+                    }
                     Glide.with(ctx)
-                            .load(stateCabinet.getOfficials().get(0).getPhotoUrl())
+                            .load(photo)
                             .centerCrop()
                             .placeholder(R.drawable.ic_person)
                             .into(vicePresidentImage
@@ -189,7 +208,12 @@ public class StatesFragment extends Fragment implements View.OnClickListener{
             }
 
 
-            adapter.setStateCabinet(stateCabinet);
+            if (stateCabinet.getOffices().size() == 0){
+                adapter.setStateCabinet(getPresidentialCabinet());
+            }else {
+                adapter.setStateCabinet(stateCabinet);
+            }
+
 
         }else {
 
@@ -203,6 +227,38 @@ public class StatesFragment extends Fragment implements View.OnClickListener{
         }
 
 
+    }
+
+    private StateCabinet getPresidentialCabinet() {
+        StateCabinet cabinet = new StateCabinet();
+
+        ArrayList<Office> offices = new ArrayList<>();
+        ArrayList<Official> officials = new ArrayList<>();
+        
+        ArrayList<Integer> officialIndices = new ArrayList<>();
+        officialIndices.add(1);
+
+
+        for (Map.Entry<String, String> entry : Utilities.getCabinetOfficesAndNames().entrySet()) {
+
+            Office office = new Office();
+            Official official = new Official();
+
+            office.setOfficialIndices(officialIndices);
+            office.setName(entry.getKey());
+
+            official.setName(entry.getValue());
+
+            offices.add(office);
+            officials.add(official);
+
+        }
+
+
+        cabinet.setOffices(offices);
+        cabinet.setOfficials(officials);
+
+        return cabinet;
     }
 
     @Override

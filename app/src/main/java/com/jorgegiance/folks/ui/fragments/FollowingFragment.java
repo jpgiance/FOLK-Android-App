@@ -89,7 +89,7 @@ public class FollowingFragment extends Fragment {
         office = new ArrayList<>();
         office.add("In development");
         Official election = new Official();
-        election.setName("2020 United States Senate Elections");
+        election.setName("2020 US Senate Elections");
         election.setParty("election");
         election.setPhotoUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Flag_of_the_United_States_Senate.svg/1920px-Flag_of_the_United_States_Senate.svg.png");
         election.setUrls(office);
