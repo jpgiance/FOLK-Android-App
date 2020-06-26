@@ -26,7 +26,7 @@
     <string name="profile_location_zip_code">ZIP code:</string>
     <string name="profile_title">Personal Information</string>
     <string name="following_title">Candidates:</string>
-    <string name="settings_privacy_policy"><u>Privacy Policy</u></string>
+    <string name="settings_privacy_policy">Privacy Policy</string>
     <string name="NEWS_KEY">NEWS_SELECTED</string>
     <string name="vote_button">VOTE</string>
     <string name="tab_content">Content</string>
