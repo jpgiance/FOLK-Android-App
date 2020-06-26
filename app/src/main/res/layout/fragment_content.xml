@@ -7,10 +7,10 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.ContentFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/news_body"
         style="android:attr/textAppearanceMedium"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/detail_body_top_margin"
@@ -24,7 +24,20 @@
         android:textSize="@dimen/detail_body_text_size" />
 
 
+    <TextView
+        android:id="@+id/content_link"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="android:attr/textAppearanceMedium"
+        android:textColor="@color/fui_linkColor"
+        android:layout_marginTop="@dimen/detail_body_top_margin"
+        android:layout_marginStart="@dimen/detail_inner_horiz_margin_left"
+        android:layout_marginEnd="@dimen/detail_inner_horiz_margin"
+        android:text="@string/article_content_link"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
 
 
 </LinearLayout>

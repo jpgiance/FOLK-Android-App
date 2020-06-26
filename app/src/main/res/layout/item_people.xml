@@ -24,8 +24,8 @@
             android:layout_height="160dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/pence"
             tools:src="@tools:sample/avatars" />
+
 
     </androidx.cardview.widget.CardView>
 
@@ -35,7 +35,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="@string/subTitle_vice_president"
         android:textAlignment="center"
         android:textSize="12sp"
         android:maxLines="2"

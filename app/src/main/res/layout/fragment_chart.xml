@@ -18,5 +18,15 @@
         android:layout_height="400dp"
         android:layout_marginTop="260dp"
         android:layout_marginBottom="-100dp"/>
+    <RatingBar
+        android:id="@+id/rating_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:isIndicator="true"
+        android:rating="3.6"
+        android:layout_marginTop="560dp"
+        android:layout_gravity="center_horizontal"/>
+
 
 </FrameLayout>

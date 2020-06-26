@@ -66,7 +66,7 @@ public class NotificationUtil {
     private static Bitmap largeIcon( Context context){
 
         Resources res = context.getResources();
-        Bitmap largeIcon = BitmapFactory.decodeResource(res, R.drawable.trump);
+        Bitmap largeIcon = BitmapFactory.decodeResource(res, R.mipmap.ic_launcher_widget);
         return largeIcon;
 
     }

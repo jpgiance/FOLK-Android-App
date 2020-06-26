@@ -39,7 +39,6 @@
             android:layout_height="160dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/trump"
             tools:src="@tools:sample/avatars"
             android:contentDescription="@string/president_picture_description" />
 
@@ -90,7 +89,6 @@
             android:layout_height="160dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/pence"
             tools:src="@tools:sample/avatars"
             android:contentDescription="@string/vice_president_picture_description" />
 

@@ -29,7 +29,6 @@
 
         <ImageView
             android:id="@+id/item_image"
-            android:src="@drawable/pence"
             android:background="@color/colorPrimaryDark"
             android:layout_width="380dp"
             android:layout_height="286dp"

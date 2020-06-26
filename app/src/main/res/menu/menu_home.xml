@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="@string/search"
+        android:contentDescription="search"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/more"
+        android:title="Filter by:"
+        android:contentDescription="filter"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/sort_1"
+        android:checkable="true"
+        android:checked="false"
+        android:title="Local articles" />
+
+    <item
+        android:id="@+id/sort_2"
+        android:checkable="true"
+        android:checked="false"
+        android:title="National articles" />
+
+    <item
+        android:id="@+id/sort_3"
+        android:checkable="true"
+        android:checked="false"
+        android:title="Rated as trusted" />
+</menu>

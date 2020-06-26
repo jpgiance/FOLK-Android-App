@@ -83,7 +83,7 @@ public class ChartFragment extends Fragment {
         chart.setCenterText(generateCenterText());
         chart.setCenterTextSize(16f);
 
-        setData(4, 100);
+        setDataChart2(4, 100);
 
         chart.animateY(1400, Easing.EaseInOutQuad);
 
@@ -130,7 +130,7 @@ public class ChartFragment extends Fragment {
         chart2.setCenterText(generateCenterText());
         chart2.setCenterTextSize(16f);
 
-        setData(4, 100);
+        setDataChart1(4, 100);
 
         chart2.animateY(1400, Easing.EaseInOutQuad);
 
@@ -155,7 +155,33 @@ public class ChartFragment extends Fragment {
         return s;
     }
 
-    private void setData(int count, float range) {
+    private void setDataChart2(int count, float range) {
+
+        ArrayList<PieEntry> values = new ArrayList<>();
+
+
+        values.add(new PieEntry(60, "Biased"));
+        values.add(new PieEntry(600, "Objective"));
+
+
+        PieDataSet dataSet = new PieDataSet(values, "");
+        dataSet.setSliceSpace(3f);
+        dataSet.setSelectionShift(5f);
+
+        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+        //dataSet.setSelectionShift(0f);
+
+        PieData data = new PieData(dataSet);
+        data.setValueFormatter(new PercentFormatter(chart));
+
+        data.setValueTextSize(16f);
+        data.setValueTextColor(Color.BLACK);
+        chart2.setData(data);
+
+        chart2.invalidate();
+    }
+
+    private void setDataChart1(int count, float range) {
 
         ArrayList<PieEntry> values = new ArrayList<>();
 
@@ -177,10 +203,8 @@ public class ChartFragment extends Fragment {
         data.setValueTextSize(16f);
         data.setValueTextColor(Color.BLACK);
         chart.setData(data);
-        chart2.setData(data);
 
         chart.invalidate();
-        chart2.invalidate();
     }
 
 }

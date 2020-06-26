@@ -87,6 +87,7 @@
     <string name="widget_title">Check out these new stories</string>
     <string name="Button_rate_this_article">Rate this article</string>
     <string name="elections">Elections</string>
+    <string name="article_content_link">Continue reading this article on </string>
 
 
 </resources>

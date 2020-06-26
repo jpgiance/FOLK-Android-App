@@ -37,7 +37,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimaryDark"
-            app:layout_scrollFlags="scroll|enterAlways">
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:menu="@menu/menu_home">
 
             <ImageView
                 android:id="@+id/icon_logo"

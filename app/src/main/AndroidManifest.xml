@@ -12,6 +12,8 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_logo"
         android:supportsRtl="true">
+        <activity android:name=".ui.activities.MemberDescriptionActivity"></activity>
+
         <receiver android:name=".ui.widget.TopStoriesWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -42,8 +44,6 @@
         <activity
             android:name=".ui.activities.PeopleActivity"
             android:theme="@style/FolksThemeDark" />
-
-
     </application>
 
 </manifest>

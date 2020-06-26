@@ -11,7 +11,9 @@
     <color name="colorSilver">#C0C0C0</color>
     <color name="colorDarkGrey">#3C3F41</color>
     <color name="colorLightGreen">#B0FFBC</color>
-    <color name="colorLinkBlue">#1B70E1</color>
+    <color name="colorLinkBlue">#31b6e7</color>
+
+    <color name="blue_grey">#607d8b</color>
 <!--    1984FF-->
 </resources>
 
