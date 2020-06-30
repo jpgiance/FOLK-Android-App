@@ -16,11 +16,11 @@ import com.jorgegiance.folks.R;
 import com.jorgegiance.folks.adapters.FollowingAdapter;
 import com.jorgegiance.folks.adapters.SettingsAdapter;
 
-public class SettingsFragment extends Fragment {
+public class UserSettingsFragment extends Fragment {
 
     private Context ctx;
 
-    public SettingsFragment() {
+    public UserSettingsFragment() {
         // Required empty public constructor
     }
 

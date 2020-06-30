@@ -42,6 +42,7 @@
         </activity>
         <activity
             android:name=".ui.activities.PeopleActivity"
+            android:launchMode="singleTop"
             android:theme="@style/FolksThemeDark" />
         <activity
             android:name=".ui.activities.MemberDescriptionActivity"

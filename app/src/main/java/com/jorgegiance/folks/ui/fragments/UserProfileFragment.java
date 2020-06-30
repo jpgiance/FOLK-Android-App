@@ -15,15 +15,15 @@ import com.jorgegiance.folks.R;
 import com.jorgegiance.folks.adapters.ProfileAdapter;
 
 
-public class ProfileFragment extends Fragment {
+public class UserProfileFragment extends Fragment {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
     private boolean fieldsState = false;
     Context ctx;
 
 
-    public static ProfileFragment newInstance( int index ) {
-        ProfileFragment fragment = new ProfileFragment();
+    public static UserProfileFragment newInstance( int index ) {
+        UserProfileFragment fragment = new UserProfileFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(ARG_SECTION_NUMBER, index);
         fragment.setArguments(bundle);

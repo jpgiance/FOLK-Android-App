@@ -21,7 +21,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.jorgegiance.folks.R;
-import com.jorgegiance.folks.adapters.DetailPagerAdapter;
+import com.jorgegiance.folks.adapters.PagerAdapter;
 import com.jorgegiance.folks.util.Utilities;
 import com.jorgegiance.folks.viewmodels.DetailActivityViewModel;
 
@@ -70,7 +70,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
 
         voteButton.setOnClickListener(this);
 
-        DetailPagerAdapter detailPagerAdapter = new DetailPagerAdapter(getActivity(), getContext());
+        PagerAdapter detailPagerAdapter = new PagerAdapter(getActivity(), getContext(), false, false, false, true);
         viewPager.setAdapter(detailPagerAdapter);
 
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(

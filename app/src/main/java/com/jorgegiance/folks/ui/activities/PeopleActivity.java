@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.jorgegiance.folks.R;
-import com.jorgegiance.folks.adapters.PeoplePagerAdapter;
+import com.jorgegiance.folks.adapters.PagerAdapter;
 
 public class PeopleActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -45,7 +45,7 @@ public class PeopleActivity extends AppCompatActivity implements View.OnClickLis
         setIconColor();
 
 
-        PeoplePagerAdapter pagerAdapter = new PeoplePagerAdapter(this);
+        PagerAdapter pagerAdapter = new PagerAdapter(this, this, false, true, false, false);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setUserInputEnabled(false);
 

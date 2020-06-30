@@ -22,6 +22,7 @@ public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.MembersH
 
     private Context ctx;
     private List<Member> membersList;
+    private OnClickHandler memberClickHandler;
 
     public MembersAdapter( Context ctx ) {
         this.ctx = ctx;
@@ -62,10 +63,14 @@ public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.MembersH
         notifyDataSetChanged();
     }
 
+    public void addMemberClickHandler(MembersAdapter.OnClickHandler handler){
+        this.memberClickHandler = handler;
+    }
 
 
 
-    public class MembersHolder extends RecyclerView.ViewHolder {
+
+    public class MembersHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         ImageView personImage;
         TextView personTitle;
@@ -77,6 +82,23 @@ public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.MembersH
             personImage = itemView.findViewById(R.id.image_person);
             personName = itemView.findViewById(R.id.person_name);
             personTitle = itemView.findViewById(R.id.person_title);
+
+            personImage.setOnClickListener(this);
+            personName.setOnClickListener(this);
+            personTitle.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick( View v ) {
+            memberClickHandler.onMemberClicked(getAdapterPosition());
         }
     }
+
+
+
+    public interface OnClickHandler{
+        void onMemberClicked(int position);
+    }
 }
+
+

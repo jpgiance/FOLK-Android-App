@@ -20,8 +20,7 @@ import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.jorgegiance.folks.R;
-import com.jorgegiance.folks.adapters.UserPagerAdapter;
-
+import com.jorgegiance.folks.adapters.PagerAdapter;
 
 
 public class UserActivity extends AppCompatActivity implements View.OnClickListener{
@@ -47,7 +46,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         logOut = findViewById(R.id.log_out);
 
 
-        UserPagerAdapter userPagerAdapter = new UserPagerAdapter(this, this);
+        PagerAdapter userPagerAdapter = new PagerAdapter(this, this, true, false, false, false);
         viewPager.setAdapter(userPagerAdapter);
 
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(

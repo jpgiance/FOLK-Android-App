@@ -11,14 +11,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.firebase.ui.auth.AuthUI;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.jorgegiance.folks.R;
-import com.jorgegiance.folks.adapters.UserPagerAdapter;
+import com.jorgegiance.folks.adapters.PagerAdapter;
 
 public class MemberDescriptionActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -26,7 +24,7 @@ public class MemberDescriptionActivity extends AppCompatActivity implements View
     AppBarLayout appBarLayout;
     ViewPager2 viewPager;
     TabLayout tabs;
-    ImageView userButton, homeButton, peopleButton;
+    ImageView userButton, homeButton, peopleButton, backButton;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -38,9 +36,10 @@ public class MemberDescriptionActivity extends AppCompatActivity implements View
         userButton = findViewById(R.id.icon_user);
         homeButton = findViewById(R.id.icon_home);
         peopleButton = findViewById(R.id.icon_peopleGroup);
+        backButton = findViewById(R.id.icon_back_member_description);
 
 
-        UserPagerAdapter userPagerAdapter = new UserPagerAdapter(this, this);
+        PagerAdapter userPagerAdapter = new PagerAdapter(this, this, false, false, true, false);
         viewPager.setAdapter(userPagerAdapter);
 
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(
@@ -57,12 +56,12 @@ public class MemberDescriptionActivity extends AppCompatActivity implements View
                         tab.getIcon().setTint(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent));
                         break;
                     case 1:
-                        tab.setText(R.string.tab_following);
-                        tab.setIcon(R.drawable.ic_star_following);
+                        tab.setText("Media");
+                        tab.setIcon(R.drawable.ic_cloud_black_24dp);
                         break;
                     case 2:
-                        tab.setText(R.string.tab_settings);
-                        tab.setIcon(R.drawable.ic_settings_user);
+                        tab.setText("Comments");
+                        tab.setIcon(R.drawable.ic_comment_black_24dp);
                         break;
                 }
             }
@@ -87,9 +86,8 @@ public class MemberDescriptionActivity extends AppCompatActivity implements View
             case R.id.icon_peopleGroup:
                 transitionToPeopleScreen();
                 break;
-            case R.id.log_out:
-                AuthUI.getInstance().signOut(this);
-                finish();
+            case R.id.icon_back_member_description:
+                this.onBackPressed();
                 break;
 
         }
@@ -100,6 +98,7 @@ public class MemberDescriptionActivity extends AppCompatActivity implements View
         userButton.setOnClickListener(this);
         homeButton.setOnClickListener(this);
         peopleButton.setOnClickListener(this);
+        backButton.setOnClickListener(this);
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

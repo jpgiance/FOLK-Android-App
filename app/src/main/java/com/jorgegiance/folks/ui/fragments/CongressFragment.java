@@ -1,7 +1,9 @@
 package com.jorgegiance.folks.ui.fragments;
 
 import android.annotation.SuppressLint;
+import android.app.IntentService;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.jorgegiance.folks.R;
 import com.jorgegiance.folks.adapters.MembersAdapter;
 import com.jorgegiance.folks.models.propublicaModels.Member;
+import com.jorgegiance.folks.ui.activities.MemberDescriptionActivity;
 import com.jorgegiance.folks.ui.dialogs.StateFilterDialog;
 import com.jorgegiance.folks.util.Utilities;
 import com.jorgegiance.folks.viewmodels.CongressViewModel;
@@ -73,7 +76,21 @@ public class CongressFragment extends Fragment implements View.OnClickListener{
         recyclerCongress.setHasFixedSize(true);
 
 
+        adapterCongress.addMemberClickHandler(new MembersAdapter.OnClickHandler() {
+            @Override
+            public void onMemberClicked( int position ) {
+                Intent memberDescriptionIntent = new Intent(ctx, MemberDescriptionActivity.class);
+                startActivity(memberDescriptionIntent);
+            }
+        });
 
+        adapterSenate.addMemberClickHandler(new MembersAdapter.OnClickHandler() {
+            @Override
+            public void onMemberClicked( int position ) {
+                Intent memberDescriptionIntent = new Intent(ctx, MemberDescriptionActivity.class);
+                startActivity(memberDescriptionIntent);
+            }
+        });
 
 
         return rootView;
@@ -204,6 +221,8 @@ public class CongressFragment extends Fragment implements View.OnClickListener{
     private void setListener() {
         filterSenate.setOnClickListener(this);
         filterCongress.setOnClickListener(this);
+
+
     }
 
 

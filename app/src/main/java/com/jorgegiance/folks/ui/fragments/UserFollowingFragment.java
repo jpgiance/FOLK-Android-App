@@ -20,11 +20,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FollowingFragment extends Fragment {
+public class UserFollowingFragment extends Fragment {
 
     private Context ctx;
 
-    public FollowingFragment() {
+    public UserFollowingFragment() {
         // Required empty public constructor
     }
 
