@@ -40,7 +40,7 @@ public class Member {
     private String party;
     @SerializedName("leadership_role")
     @Expose
-    private Object leadershipRole;
+    private String leadershipRole;
     @SerializedName("twitter_account")
     @Expose
     private String twitterAccount;
@@ -241,11 +241,11 @@ public class Member {
         this.party = party;
     }
 
-    public Object getLeadershipRole() {
+    public String getLeadershipRole() {
         return leadershipRole;
     }
 
-    public void setLeadershipRole(Object leadershipRole) {
+    public void setLeadershipRole( String leadershipRole) {
         this.leadershipRole = leadershipRole;
     }
 

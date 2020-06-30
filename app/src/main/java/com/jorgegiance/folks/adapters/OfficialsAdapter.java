@@ -88,7 +88,7 @@ public class OfficialsAdapter extends RecyclerView.Adapter<OfficialsAdapter.Offi
         notifyDataSetChanged();
     }
 
-    public class OfficialsHolder extends RecyclerView.ViewHolder {
+    public class OfficialsHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         ImageView personImage;
         TextView personTitle;
@@ -100,6 +100,19 @@ public class OfficialsAdapter extends RecyclerView.Adapter<OfficialsAdapter.Offi
             personImage = itemView.findViewById(R.id.image_person);
             personName = itemView.findViewById(R.id.person_name);
             personTitle = itemView.findViewById(R.id.person_title);
+
+            personImage.setOnClickListener(this);
+            personName.setOnClickListener(this);
+            personTitle.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick( View v ) {
+
+        }
+    }
+
+    public interface OnClickHandler {
+       // void onItemClicked(  news );
     }
 }

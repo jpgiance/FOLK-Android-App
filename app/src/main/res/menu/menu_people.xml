@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/favorite"
+        android:id="@+id/elections_icon"
         android:icon="@drawable/ic_how_to_vote_24px"
         android:title="favorite"
         android:contentDescription="favorite"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/search"
+        android:id="@+id/search_icon"
         android:icon="@drawable/ic_search_black_24dp"
         android:title="@string/search"
         android:contentDescription="search"

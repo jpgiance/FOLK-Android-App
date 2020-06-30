@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/official_website"
+        android:title="Visit official website"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/contact_form"
+        android:title="Contact form"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/govtrack_link"
+        android:title="More at GovTrack"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/wiki_link"
+        android:title="More at Wikipedia"
+        app:showAsAction="never"/>
+
+</menu>

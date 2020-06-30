@@ -161,7 +161,7 @@ public class ChartFragment extends Fragment {
 
 
         values.add(new PieEntry(60, "Biased"));
-        values.add(new PieEntry(600, "Objective"));
+        values.add(new PieEntry(600, "Unbiased"));
 
 
         PieDataSet dataSet = new PieDataSet(values, "");
@@ -187,7 +187,7 @@ public class ChartFragment extends Fragment {
 
 
         values.add(new PieEntry(60, "Fake"));
-        values.add(new PieEntry(600, "Credible"));
+        values.add(new PieEntry(600, "Trusted"));
 
 
         PieDataSet dataSet = new PieDataSet(values, "");

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,6 +34,7 @@ public class CongressFragment extends Fragment implements View.OnClickListener{
 
     //ui components
     private TextView filterSenate, filterCongress;
+    private ImageView guideSenate, guideCongress;
 
     private PeopleActivityViewModel peopleActivityViewModel;
     private CongressViewModel congressViewModel;
@@ -53,6 +55,8 @@ public class CongressFragment extends Fragment implements View.OnClickListener{
 
         filterCongress = rootView.findViewById(R.id.filter_congress);
         filterSenate = rootView.findViewById(R.id.filter_senate);
+        guideSenate = rootView.findViewById(R.id.horizontal_guide_senate);
+        guideCongress = rootView.findViewById(R.id.horizontal_guide_congress);
 
         setListener();
 

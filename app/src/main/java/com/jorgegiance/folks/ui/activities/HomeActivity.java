@@ -1,7 +1,6 @@
 package com.jorgegiance.folks.ui.activities;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
@@ -23,7 +22,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.material.snackbar.Snackbar;
@@ -45,7 +43,7 @@ import java.util.Calendar;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener, HomeAdapter.HomeAdapterOnClickHandler {
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener, HomeAdapter.OnClickHandler {
 
     public static final int RC_SIGN_IN = 1;
     private static final String TAG = "TAG";
@@ -81,7 +79,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         homeButton = findViewById(R.id.icon_home);
         peopleButton = findViewById(R.id.icon_peopleGroup);
         mProgressBar = findViewById(R.id.home_progressBar);
-        topButton = findViewById(R.id.icon_top_arrow);
+        //topButton = findViewById(R.id.icon_top_arrow);
         coordinatorLayout = findViewById(R.id.home_coordinator_layout);
 
 
@@ -224,7 +222,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         userButton.setOnClickListener(this);
         homeButton.setOnClickListener(this);
         peopleButton.setOnClickListener(this);
-        topButton.setOnClickListener(this);
+       // topButton.setOnClickListener(this);
 
         adapter.addOnBottomReachedListener(new HomeAdapter.OnBottomReachedListener() {
             @Override
@@ -324,9 +322,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.icon_peopleGroup:
                 transitionToPeopleScreen();
                 break;
-            case R.id.icon_top_arrow:
-                transitionToTopScreen();
-                break;
+//            case R.id.icon_top_arrow:
+//                transitionToTopScreen();
+//                break;
         }
     }
 

@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private HomeAdapterOnClickHandler handler;
+    private OnClickHandler handler;
     private OnBottomReachedListener mOnBottomReachedListener;
     private Context ctx;
     private ArrayList<Item> homeItemsList;
@@ -33,7 +33,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static int TYPE_LIST = 5;
     private static int TYPE_LOADING = 6;
 
-    public HomeAdapter( Context ctx, HomeAdapterOnClickHandler handler ) {
+    public HomeAdapter( Context ctx, OnClickHandler handler ) {
         this.ctx = ctx;
         this.handler = handler;
     }
@@ -350,7 +350,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
 
-    public interface HomeAdapterOnClickHandler {
+    public interface OnClickHandler {
         void onItemClicked( News news );
     }
 

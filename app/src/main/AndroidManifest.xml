@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_logo"
         android:supportsRtl="true">
-        <activity android:name=".ui.activities.MemberDescriptionActivity"></activity>
+
 
         <receiver android:name=".ui.widget.TopStoriesWidget">
             <intent-filter>
@@ -37,13 +37,15 @@
             android:theme="@style/FolksThemeDark">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".ui.activities.PeopleActivity"
             android:theme="@style/FolksThemeDark" />
+        <activity
+            android:name=".ui.activities.MemberDescriptionActivity"
+            android:theme="@style/FolksThemeDark"/>
     </application>
 
 </manifest>

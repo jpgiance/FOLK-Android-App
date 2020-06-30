@@ -47,16 +47,6 @@
                 android:src="@drawable/ic_logo_folks"
                 android:contentDescription="@string/logo_description" />
 
-            <ImageView
-                android:id="@+id/icon_top_arrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:layout_gravity="center|right"
-                android:src="@drawable/ic_up_arrow_inside_circle"
-                android:contentDescription="@string/jump_to_top_button_description"
-                tools:ignore="RtlHardcoded" />
-
         </com.google.android.material.appbar.MaterialToolbar>
 
     </com.google.android.material.appbar.AppBarLayout>

@@ -49,11 +49,11 @@
         android:id="@+id/person_recycler_0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="28dp"
-        android:paddingEnd="20dp"
         android:layout_marginTop="5dp"
         android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
+        android:paddingStart="0dp"
+        android:paddingEnd="20dp"
+        app:layout_constraintStart_toEndOf="@+id/horizontal_guide_senate"
         app:layout_constraintTop_toBottomOf="@+id/senate_title" />
 
     <View
@@ -82,12 +82,32 @@
         android:id="@+id/person_recycler_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="28dp"
-        android:paddingEnd="20dp"
         android:layout_marginTop="5dp"
         android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
+        android:paddingStart="0dp"
+        android:paddingEnd="20dp"
+        app:layout_constraintStart_toEndOf="@+id/horizontal_guide_congress"
         app:layout_constraintTop_toBottomOf="@+id/congress_title" />
+
+    <ImageView
+        android:id="@+id/horizontal_guide_senate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_swap_horiz_black_24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/person_recycler_0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/person_recycler_0" />
+
+
+    <ImageView
+        android:id="@+id/horizontal_guide_congress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_swap_horiz_black_24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/person_recycler_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/person_recycler_1"
+        app:layout_constraintVertical_bias=".5" />
 
     <View
         android:layout_width="match_parent"
