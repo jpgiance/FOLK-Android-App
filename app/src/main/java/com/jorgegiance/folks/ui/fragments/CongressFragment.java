@@ -1,7 +1,6 @@
 package com.jorgegiance.folks.ui.fragments;
 
 import android.annotation.SuppressLint;
-import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.jorgegiance.folks.R;
 import com.jorgegiance.folks.adapters.MembersAdapter;
+import com.jorgegiance.folks.models.Person;
 import com.jorgegiance.folks.models.propublicaModels.Member;
 import com.jorgegiance.folks.ui.activities.MemberDescriptionActivity;
 import com.jorgegiance.folks.ui.dialogs.StateFilterDialog;
@@ -80,6 +80,8 @@ public class CongressFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onMemberClicked( int position ) {
                 Intent memberDescriptionIntent = new Intent(ctx, MemberDescriptionActivity.class);
+                Person person = Person.MemberToPerson(congressViewModel.getCongressMembers().getValue().get(position));
+                memberDescriptionIntent.putExtra("member", person);
                 startActivity(memberDescriptionIntent);
             }
         });
@@ -88,6 +90,8 @@ public class CongressFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onMemberClicked( int position ) {
                 Intent memberDescriptionIntent = new Intent(ctx, MemberDescriptionActivity.class);
+                Person person = Person.MemberToPerson(congressViewModel.getSenateMembers().getValue().get(position));
+                memberDescriptionIntent.putExtra("member", person);
                 startActivity(memberDescriptionIntent);
             }
         });

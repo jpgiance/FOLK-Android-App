@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/icon_foolowing"
+        android:icon="@drawable/ic_star_following"
+        android:title="@string/follow"
+        android:contentDescription="search"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/official_website"
         android:title="Visit official website"
         app:showAsAction="never" />
@@ -17,6 +23,10 @@
     <item
         android:id="@+id/wiki_link"
         android:title="More at Wikipedia"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/donation"
+        android:title="Donate"
         app:showAsAction="never"/>
 
 </menu>

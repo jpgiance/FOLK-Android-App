@@ -1,5 +1,8 @@
 package com.jorgegiance.folks.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.jorgegiance.folks.models.googlecivicModels.Address;
 import com.jorgegiance.folks.models.googlecivicModels.Channel;
 import com.jorgegiance.folks.models.googlecivicModels.Official;
@@ -9,7 +12,7 @@ import com.jorgegiance.folks.util.Utilities;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person {
+public class Person implements Parcelable {
 
     private String name;                                        //
     private String title;                                       // from Member
@@ -33,6 +36,37 @@ public class Person {
 
     public Person() {
     }
+
+    protected Person( Parcel in ) {
+        name = in.readString();
+        title = in.readString();
+        leadershipRole = in.readString();
+        party = in.readString();
+        district = in.readString();
+        state = in.readString();
+        photoUrl = in.readString();
+        proPublicaId = in.readString();
+        proPublicaApiUri = in.readString();
+        govtrackId = in.readString();
+        dateOfBirth = in.readString();
+        url = in.readString();
+        youtubeAccount = in.readString();
+        twitterAccount = in.readString();
+        facebookAccount = in.readString();
+        phones = in.createStringArrayList();
+    }
+
+    public static final Creator<Person> CREATOR = new Creator<Person>() {
+        @Override
+        public Person createFromParcel( Parcel in ) {
+            return new Person(in);
+        }
+
+        @Override
+        public Person[] newArray( int size ) {
+            return new Person[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -248,5 +282,30 @@ public class Person {
 
         return person;
 
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel( Parcel dest, int flags ) {
+        dest.writeString(name);
+        dest.writeString(title);
+        dest.writeString(leadershipRole);
+        dest.writeString(party);
+        dest.writeString(district);
+        dest.writeString(state);
+        dest.writeString(photoUrl);
+        dest.writeString(proPublicaId);
+        dest.writeString(proPublicaApiUri);
+        dest.writeString(govtrackId);
+        dest.writeString(dateOfBirth);
+        dest.writeString(url);
+        dest.writeString(youtubeAccount);
+        dest.writeString(twitterAccount);
+        dest.writeString(facebookAccount);
+        dest.writeStringList(phones);
     }
 }

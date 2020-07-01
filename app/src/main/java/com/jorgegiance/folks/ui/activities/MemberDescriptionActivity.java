@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
@@ -12,24 +13,39 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.jorgegiance.folks.R;
 import com.jorgegiance.folks.adapters.PagerAdapter;
+import com.jorgegiance.folks.models.Person;
+import com.jorgegiance.folks.util.Utilities;
+import com.jorgegiance.folks.viewmodels.MemberDescriptionActivityViewModel;
+
 
 public class MemberDescriptionActivity extends AppCompatActivity implements View.OnClickListener{
 
     // UI components
-    AppBarLayout appBarLayout;
-    ViewPager2 viewPager;
-    TabLayout tabs;
-    ImageView userButton, homeButton, peopleButton, backButton;
+    private AppBarLayout appBarLayout;
+    private ViewPager2 viewPager;
+    private TabLayout tabs;
+    private ImageView userButton, homeButton, peopleButton, backButton, memberPhoto;
+
+    // ViewModels
+    private MemberDescriptionActivityViewModel mMemberViewModel;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member_description);
+
+        mMemberViewModel = new ViewModelProvider(this).get(MemberDescriptionActivityViewModel.class);
+
+        Intent intent = getIntent();
+        if (intent.hasExtra("member")){
+            mMemberViewModel.setPerson((Person) intent.getParcelableExtra("member"));
+        }
 
         viewPager = findViewById(R.id.members_view_pager);
         tabs = findViewById(R.id.members_tabs);
@@ -37,6 +53,7 @@ public class MemberDescriptionActivity extends AppCompatActivity implements View
         homeButton = findViewById(R.id.icon_home);
         peopleButton = findViewById(R.id.icon_peopleGroup);
         backButton = findViewById(R.id.icon_back_member_description);
+        memberPhoto = findViewById(R.id.member_photo);
 
 
         PagerAdapter userPagerAdapter = new PagerAdapter(this, this, false, false, true, false);
@@ -70,6 +87,13 @@ public class MemberDescriptionActivity extends AppCompatActivity implements View
 
         setIconColor();
         setListeners();
+
+        Glide.with(this)
+                .load(mMemberViewModel.getPerson().getPhotoUrl())
+                .centerCrop()
+                .placeholder(R.drawable.ic_person)
+                .into(memberPhoto);
+
     }
 
 
@@ -140,6 +164,6 @@ public class MemberDescriptionActivity extends AppCompatActivity implements View
 
     private void setIconColor() {
 
-        userButton.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent));
+        peopleButton.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent));
     }
 }
