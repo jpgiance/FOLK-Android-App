@@ -1,6 +1,9 @@
 package com.jorgegiance.folks.ui.activities;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -30,7 +33,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
     ViewPager2 viewPager;
     TabLayout tabs;
     TextView logOut;
-    ImageView userButton, homeButton, peopleButton;
+    private TextView userButton, homeButton, peopleButton;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -145,6 +148,12 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setIconColor() {
 
-        userButton.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent));
+        userButton.setTextColor(ContextCompat.getColor(this, R.color.colorAccent));
+        for (Drawable drawable : userButton.getCompoundDrawables()) {
+            if (drawable != null) {
+                drawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(this, R.color.colorAccent), PorterDuff.Mode.SRC_IN));
+            }
+        }
+
     }
 }

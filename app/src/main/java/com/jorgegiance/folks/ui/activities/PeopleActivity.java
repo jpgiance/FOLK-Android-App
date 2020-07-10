@@ -7,9 +7,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -21,7 +25,7 @@ public class PeopleActivity extends AppCompatActivity implements View.OnClickLis
     // UI components
     TabLayout tabLayout;
     ViewPager2 viewPager;
-    ImageView userButton, homeButton, peopleButton;
+    private TextView userButton, homeButton, peopleButton;
 
     FragmentManager manager = getSupportFragmentManager();
 
@@ -75,7 +79,12 @@ public class PeopleActivity extends AppCompatActivity implements View.OnClickLis
 
     private void setIconColor() {
 
-        peopleButton.setColorFilter(ContextCompat.getColor(this, R.color.colorAccent));
+        peopleButton.setTextColor(ContextCompat.getColor(this, R.color.colorAccent));
+        for (Drawable drawable : peopleButton.getCompoundDrawables()) {
+            if (drawable != null) {
+                drawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(this, R.color.colorAccent), PorterDuff.Mode.SRC_IN));
+            }
+        }
     }
 
     private void setListeners() {

@@ -5,9 +5,13 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -23,7 +27,8 @@ public class DetailHomeActivity extends AppCompatActivity implements View.OnClic
     // UI components
     private AppBarLayout appBarLayout;
     private MaterialToolbar appBar;
-    private ImageView userButton, homeButton, peopleButton, backButton, shareButton;
+    private ImageView  backButton, shareButton;
+    private TextView userButton, homeButton, peopleButton;
 
 
     // ViewModels
@@ -125,6 +130,11 @@ public class DetailHomeActivity extends AppCompatActivity implements View.OnClic
     private void setIconColor() {
 
 
-        homeButton.setColorFilter(ContextCompat.getColor(this, R.color.colorAccent));
+        homeButton.setTextColor(ContextCompat.getColor(this, R.color.colorAccent));
+        for (Drawable drawable : homeButton.getCompoundDrawables()) {
+            if (drawable != null) {
+                drawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(this, R.color.colorAccent), PorterDuff.Mode.SRC_IN));
+            }
+        }
     }
 }

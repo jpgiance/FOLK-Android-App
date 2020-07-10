@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/icon_foolowing"
+        android:id="@+id/icon_following"
         android:icon="@drawable/ic_star_following"
         android:title="@string/follow"
         android:contentDescription="search"

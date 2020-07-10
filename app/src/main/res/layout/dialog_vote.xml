@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/fake_check_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="52dp"
+        android:text="Fake"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/appCompatCheckBox3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:text="Trusted"
+        app:layout_constraintBottom_toBottomOf="@+id/fake_check_box"
+        app:layout_constraintStart_toEndOf="@+id/fake_check_box"
+        app:layout_constraintTop_toTopOf="@+id/fake_check_box"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/biased_check_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:text="Biased"
+        app:layout_constraintStart_toStartOf="@+id/fake_check_box"
+        app:layout_constraintTop_toBottomOf="@+id/fake_check_box" />
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/appCompatCheckBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Unbiased"
+        app:layout_constraintBottom_toBottomOf="@+id/biased_check_box"
+        app:layout_constraintStart_toStartOf="@+id/appCompatCheckBox3"
+        app:layout_constraintTop_toTopOf="@+id/biased_check_box" />
+
+    <RatingBar
+        android:id="@+id/rating_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:isIndicator="false"
+        android:numStars="5"
+        android:rating="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/biased_check_box" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

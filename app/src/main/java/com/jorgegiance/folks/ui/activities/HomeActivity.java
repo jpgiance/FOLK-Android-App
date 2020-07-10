@@ -16,12 +16,16 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.material.snackbar.Snackbar;
@@ -51,8 +55,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     // UI components
     private ProgressBar mProgressBar;
-    private ImageView userButton, homeButton, peopleButton, topButton;
+    private ImageView topButton;
     private CoordinatorLayout coordinatorLayout;
+    private TextView userButton, homeButton, peopleButton;
 
     private HomeAdapter adapter;
     private RecyclerView recycler;
@@ -214,7 +219,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setIconColor() {
 
-        homeButton.setColorFilter(ContextCompat.getColor(this, R.color.colorAccent));
+        homeButton.setTextColor(ContextCompat.getColor(this, R.color.colorAccent));
+        for (Drawable drawable : homeButton.getCompoundDrawables()) {
+            if (drawable != null) {
+                drawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(this, R.color.colorAccent), PorterDuff.Mode.SRC_IN));
+            }
+        }
     }
 
     private void setListeners() {

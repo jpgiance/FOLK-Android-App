@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -22,8 +23,11 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.jorgegiance.folks.R;
 import com.jorgegiance.folks.adapters.PagerAdapter;
+import com.jorgegiance.folks.ui.dialogs.VoteDialog;
 import com.jorgegiance.folks.util.Utilities;
 import com.jorgegiance.folks.viewmodels.DetailActivityViewModel;
+
+import java.util.Objects;
 
 
 public class DetailFragment extends Fragment implements View.OnClickListener{
@@ -128,10 +132,16 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
 
         switch (v.getId()){
             case R.id.vote_button:
-                Toast.makeText(ctx, "Available soon", Toast.LENGTH_SHORT).show();
+                showVoteDialog();
                 break;
 
         }
 
+    }
+
+    private void showVoteDialog() {
+        FragmentManager fm = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
+        VoteDialog dialog = new VoteDialog();
+        dialog.show(fm, "vote_dialog");
     }
 }
